@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://bmg56sw0xgpp5"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/WeaponStats/WeaponStats.cs" id="1_hf6wi"]
+
+[resource]
+script = ExtResource("1_hf6wi")
+_baseDamage = 20
+_baseRateOfFire = 1.0
+_weaponWeight = 1.0
+_weaponShakeForce = 0.6
+_screenShakeDecay = 1.0
+_maxAmmoReserve = 18
+_baseClipSize = 6
+_baseSpread = 30.0
+_baseReloadSpeed = 5.0
+_chargeRate = 10.0

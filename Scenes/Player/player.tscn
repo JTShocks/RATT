@@ -1,0 +1,206 @@
+[gd_scene load_steps=21 format=3 uid="uid://cqqvbfhc1uj6h"]
+
+[ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
+[ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
+[ext_resource type="PackedScene" uid="uid://d4il6rke3conk" path="res://Scenes/Weapons/weapon_assault_rifle.tscn" id="3_3obop"]
+[ext_resource type="PackedScene" uid="uid://bi50so2vw14vh" path="res://Scenes/Weapons/weapon_revolver.tscn" id="4_8g050"]
+[ext_resource type="PackedScene" uid="uid://bn73lodf25whj" path="res://Scenes/Weapons/weapon_spear.tscn" id="5_o2tbf"]
+[ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/WeaponAmmo.cs" id="5_xefa2"]
+[ext_resource type="Texture2D" uid="uid://dg5motqhcl4ib" path="res://Art/Sprites/test_rendered_player.png" id="6_0kr2v"]
+[ext_resource type="FontFile" uid="uid://cwuigyulqxaqa" path="res://Art/Fonts/StepsMono/Steps-Mono.otf" id="7_ja4hm"]
+[ext_resource type="FontFile" uid="uid://c41hf5ki0r0xp" path="res://Art/Fonts/StepsMono/Steps-Mono-Thin.otf" id="8_faeif"]
+[ext_resource type="FontFile" uid="uid://bg3vvhwnq5ung" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Regular.otf" id="9_ltyq7"]
+[ext_resource type="Script" path="res://Scripts/UI Elements/DebugMenu.cs" id="9_ukkj1"]
+[ext_resource type="Theme" uid="uid://dt2oug17jt2rj" path="res://Art/Fonts/theme_playerHud.tres" id="10_1ejha"]
+[ext_resource type="PackedScene" uid="uid://cwa10wbdj26qq" path="res://Scenes/Components/input_component.tscn" id="12_1gkp0"]
+[ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/ReloadBar.cs" id="12_7bet3"]
+[ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
+[ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
+[ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_liw4j"]
+font = ExtResource("9_ltyq7")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mktd5"]
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
+radius = 72.0
+height = 255.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movementComponent", "gravityComponent", "healthComponent", "inputComponent", "body")]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_26cdu")
+CanMove = true
+CanJump = true
+CanShoot = true
+movementComponent = NodePath("MovementComponent")
+gravityComponent = NodePath("GravityComponent")
+healthComponent = NodePath("HealthComponent")
+inputComponent = NodePath("InputComponent")
+body = NodePath("Body")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="WeaponController" parent="Body" node_paths=PackedStringArray("ActiveWeapon") instance=ExtResource("2_snfsn")]
+ActiveWeapon = NodePath("weapon_spear")
+
+[node name="weapon_assaultRifle" parent="Body/WeaponController" instance=ExtResource("3_3obop")]
+z_index = 1
+position = Vector2(77, -32)
+
+[node name="weapon_revolver" parent="Body/WeaponController" instance=ExtResource("4_8g050")]
+visible = false
+z_index = 1
+position = Vector2(128, 0)
+
+[node name="weapon_spear" parent="Body/WeaponController" instance=ExtResource("5_o2tbf")]
+z_index = 1
+position = Vector2(128, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+texture = ExtResource("6_0kr2v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WeaponAmmo" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("currentAmmo", "remainingAmmo")]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -227.0
+offset_right = -200.0
+offset_bottom = -27.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("5_xefa2")
+currentAmmo = NodePath("CurrentClip")
+remainingAmmo = NodePath("Reserves")
+
+[node name="CurrentClip" type="Label" parent="CanvasLayer/WeaponAmmo"]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 103.0
+offset_bottom = 118.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_ja4hm")
+theme_override_font_sizes/font_size = 64
+text = "00"
+
+[node name="Reserves" type="Label" parent="CanvasLayer/WeaponAmmo"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 118.0
+offset_right = 206.0
+offset_bottom = 163.0
+theme_override_fonts/font = ExtResource("8_faeif")
+theme_override_font_sizes/font_size = 32
+text = "000"
+
+[node name="Debug" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "playerPosition", "currentMap")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = -140.0
+offset_right = 240.0
+offset_bottom = -100.0
+grow_vertical = 0
+script = ExtResource("9_ukkj1")
+player = NodePath("../..")
+playerPosition = NodePath("PlayerPosition")
+currentMap = NodePath("CurrentMap")
+
+[node name="PlayerPosition" type="Label" parent="CanvasLayer/Debug"]
+layout_mode = 0
+offset_left = -80.0
+offset_right = 100.0
+offset_bottom = 26.0
+text = "Position:"
+label_settings = SubResource("LabelSettings_liw4j")
+
+[node name="CurrentMap" type="Label" parent="CanvasLayer/Debug"]
+layout_mode = 0
+offset_left = -80.0
+offset_top = 26.0
+offset_right = -40.0
+offset_bottom = 49.0
+theme = ExtResource("10_1ejha")
+text = "Current Map"
+label_settings = SubResource("LabelSettings_mktd5")
+
+[node name="ReloadBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -177.0
+offset_right = 20.0
+offset_bottom = -137.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+
+[node name="ProgressBar" type="ProgressBar" parent="ReloadBar"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 16)
+show_percentage = false
+script = ExtResource("12_7bet3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_14w2p")
+
+[node name="InputComponent" parent="." instance=ExtResource("12_1gkp0")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("13_4q2jj")]
+MaxHealth = 100.0
+
+[node name="MovementComponent" parent="." instance=ExtResource("14_g1t3g")]
+moveSpeed = 400.0
+
+[node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
+
+[connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
+[connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="ReloadBar/ProgressBar" method="Deactivate"]
+[connection signal="OnWeaponReload" from="Body/WeaponController" to="ReloadBar/ProgressBar" method="Activate"]

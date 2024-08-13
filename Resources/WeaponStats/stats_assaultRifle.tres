@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=2 format=3 uid="uid://dux6upkjbnhvb"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/WeaponStats/WeaponStats.cs" id="1_garqn"]
+
+[resource]
+script = ExtResource("1_garqn")
+_baseDamage = 5
+_baseRateOfFire = 0.09
+_weaponWeight = 1.0
+_weaponShakeForce = 0.15
+_screenShakeDecay = 0.8
+_maxAmmoReserve = 90
+_baseClipSize = 30
+_baseSpread = 50.0
+_baseReloadSpeed = 2.0
+_chargeRate = 10.0

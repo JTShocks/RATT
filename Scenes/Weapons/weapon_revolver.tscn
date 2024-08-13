@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi50so2vw14vh"]
+
+[ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/Weapons/Revolver.cs" id="1_4evlc"]
+[ext_resource type="Texture2D" uid="uid://pw03choahdgo" path="res://Art/Sprites/Weapons/test_pistol.png" id="1_ck26x"]
+[ext_resource type="Resource" uid="uid://bmg56sw0xgpp5" path="res://Resources/WeaponStats/stats_revolver.tres" id="2_vcx6u"]
+[ext_resource type="AudioStream" uid="uid://c7008f705u5f0" path="res://Art/Audio/Weapons/gun-shot-1-7069.mp3" id="3_jghu4"]
+
+[node name="weapon_revolver" type="Node2D" node_paths=PackedStringArray("firePoint", "audioSource")]
+script = ExtResource("1_4evlc")
+stats = ExtResource("2_vcx6u")
+weaponType = 1
+firePoint = NodePath("FirePoint")
+audioSource = NodePath("AudioStreamPlayer2D")
+shootSFX = ExtResource("3_jghu4")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_ck26x")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+pitch_scale = 0.35
+
+[node name="FirePoint" type="Marker2D" parent="."]
+position = Vector2(71, 0)

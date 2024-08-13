@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dt2oug17jt2rj"]
+
+[ext_resource type="FontFile" uid="uid://dvjfm6tst7bxs" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Bold.otf" id="1_70h2g"]
+[ext_resource type="FontFile" uid="uid://dv2ftsasarui0" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-RegularItalic.otf" id="1_n7x6o"]
+[ext_resource type="FontFile" uid="uid://bg3vvhwnq5ung" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Regular.otf" id="2_2puef"]
+[ext_resource type="FontFile" uid="uid://cb8k6ll5jbfh3" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Medium.otf" id="4_adwi1"]
+[ext_resource type="FontFile" uid="uid://bqhvvotwto5g" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Light.otf" id="4_j084h"]
+
+[resource]
+default_font = ExtResource("2_2puef")
+default_font_size = 16
+/font_sizes/Bold = 20
+/font_sizes/Regular = 16
+/fonts/Bold = ExtResource("1_70h2g")
+/fonts/BoldItalics = ExtResource("2_2puef")
+/fonts/Italics = ExtResource("1_n7x6o")
+/fonts/Light = ExtResource("4_j084h")
+/fonts/Medium = ExtResource("4_adwi1")
+/fonts/Regular = ExtResource("2_2puef")
