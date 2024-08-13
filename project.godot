@@ -10,7 +10,9 @@ config_version=5
 
 [application]
 
-config/name="ProjectRWG"
+config/name="R.A.T.T."
+config/description="A 2D survival horror shooter set in a quarentined future. The disease spreads endlessly. With sickness, there are the RATT's"
+config/version="Indev 0.0.1"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
