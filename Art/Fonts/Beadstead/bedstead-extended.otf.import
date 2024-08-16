@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/bedstead-extended.otf-6b3954f551adc9b91bcf066
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

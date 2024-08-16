@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/OfficeCodePro-LightItalic.woff2-eace4d7074d7f
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
