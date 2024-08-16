@@ -31,9 +31,6 @@ maxOffset = Vector2(50, 10)
 target = NodePath("../Player")
 shakeMinMax = Vector2(0, 0.5)
 
-[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
-current = true
-
 [node name="Main" type="TileMapLayer" parent="."]
 position = Vector2(5, 0)
 

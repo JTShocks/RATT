@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=22 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
 [ext_resource type="PackedScene" uid="uid://d4il6rke3conk" path="res://Scenes/Weapons/weapon_assault_rifle.tscn" id="3_3obop"]
+[ext_resource type="AudioStream" uid="uid://b4bet1dbq7nfk" path="res://Art/Audio/Weapons/test_pop.mp3" id="4_7cs3v"]
 [ext_resource type="PackedScene" uid="uid://bi50so2vw14vh" path="res://Scenes/Weapons/weapon_revolver.tscn" id="4_8g050"]
 [ext_resource type="PackedScene" uid="uid://bn73lodf25whj" path="res://Scenes/Weapons/weapon_spear.tscn" id="5_o2tbf"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/WeaponAmmo.cs" id="5_xefa2"]
@@ -54,6 +55,7 @@ ActiveWeapon = NodePath("weapon_assaultRifle")
 [node name="weapon_assaultRifle" parent="Body/WeaponController" instance=ExtResource("3_3obop")]
 z_index = 1
 position = Vector2(77, -32)
+shootSFX = ExtResource("4_7cs3v")
 
 [node name="weapon_revolver" parent="Body/WeaponController" instance=ExtResource("4_8g050")]
 visible = false
@@ -201,6 +203,8 @@ MaxHealth = 100.0
 moveSpeed = 400.0
 
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
 [connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="ReloadBar/ProgressBar" method="Deactivate"]
