@@ -31,7 +31,7 @@ public partial class Running : PlayerState
         }
         else if(Mathf.IsEqualApprox(player.inputComponent.inputVector.X, 0.0f))
         {
-            EmitSignal("Finished", "Idle");
+            EmitSignal("Finished", "Running");
         }
         
     }
