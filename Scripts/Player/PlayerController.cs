@@ -14,10 +14,10 @@ public partial class PlayerController : CharacterBody2D
 
 	[ExportCategory("Nodes")]
 
-	[Export] MovementComponent movementComponent;
-	[Export] GravityComponent gravityComponent;
+	[Export] public MovementComponent movementComponent;
+	[Export] public GravityComponent gravityComponent;
 	[Export] HealthComponent healthComponent;
-	[Export] InputComponent inputComponent;
+	[Export] public InputComponent inputComponent;
 
 	[Export] Node2D body;
 
@@ -56,7 +56,7 @@ public partial class PlayerController : CharacterBody2D
 
 		if(CanMove)
 		{
-			movementComponent.HandleHorizontalMovement(this, inputComponent.inputVector.X);
+			//movementComponent.HandleHorizontalMovement(this, inputComponent.inputVector.X);
 		}
 
 		if(CanShoot)
@@ -69,7 +69,6 @@ public partial class PlayerController : CharacterBody2D
 
 		}
 
-		MoveAndSlide();
     }
 
 

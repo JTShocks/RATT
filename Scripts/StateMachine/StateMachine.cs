@@ -9,25 +9,25 @@ public partial class StateMachine : Node
     [ExportSubgroup("Debug")]
     [Export] Label currentStateLabel;
 
-    State state {get
-        {
-            if(initialState != null)
-            {
-                return initialState;
-            }
-            else
-            {
-                return GetChild<State>(0);
-            }
-        } set{}}
+    State state;
 
 
     public override async void _Ready()
     {
         base._Ready();
-        foreach(State stateNode in FindChildren("*", "State"))
+        if(initialState != null)
+            {
+                state = initialState;
+            }
+            else
+            {
+                state = GetChild<State>(0);
+            }
+
+        foreach(State stateNode in GetChildren())
         {
             stateNode.Finished += TransitionToNextState;
+            GD.Print(stateNode.Name + " found.");
         }
 
         await ToSignal(Owner, SignalName.Ready);
@@ -45,7 +45,8 @@ public partial class StateMachine : Node
 
         var previousStatePath = state.Name;
         state.OnExit();
-        state = GetNode<State>(targetStatePath);
+        state =  GetNode<State>(targetStatePath);
+
         state.OnEnter(previousStatePath);
     }
 

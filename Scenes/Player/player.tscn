@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=25 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/States/Idle.cs" id="20_rbm1n"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/States/Running.cs" id="21_psa0m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
 radius = 72.0
@@ -163,7 +164,7 @@ theme = ExtResource("10_1ejha")
 text = "Current Map"
 label_settings = SubResource("LabelSettings_mktd5")
 
-[node name="ReloadBar" type="Control" parent="."]
+[node name="PlayerUi" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -178,7 +179,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
 
-[node name="ProgressBar" type="ProgressBar" parent="ReloadBar"]
+[node name="ProgressBar" type="ProgressBar" parent="PlayerUi"]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 8
@@ -196,7 +197,7 @@ pivot_offset = Vector2(100, 16)
 show_percentage = false
 script = ExtResource("12_7bet3")
 
-[node name="CurrentState" type="Label" parent="ReloadBar"]
+[node name="CurrentState" type="Label" parent="PlayerUi"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -204,6 +205,13 @@ anchor_right = 0.5
 offset_left = -128.0
 offset_top = -32.0
 offset_right = 128.0
+theme = ExtResource("10_1ejha")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "State:"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 metadata/_edit_use_anchors_ = true
 
 [node name="InputComponent" parent="." instance=ExtResource("12_1gkp0")]
@@ -218,13 +226,19 @@ moveSpeed = 400.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "currentStateLabel")]
 script = ExtResource("19_l8h88")
-initialState = NodePath("Stand")
+initialState = NodePath("Idle")
+currentStateLabel = NodePath("../PlayerUi/CurrentState")
 
-[node name="Stand" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("20_rbm1n")
+player = NodePath("../..")
+
+[node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("21_psa0m")
+player = NodePath("../..")
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
-[connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="ReloadBar/ProgressBar" method="Deactivate"]
-[connection signal="OnWeaponReload" from="Body/WeaponController" to="ReloadBar/ProgressBar" method="Activate"]
+[connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Deactivate"]
+[connection signal="OnWeaponReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Activate"]
