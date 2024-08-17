@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=24 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -18,6 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/States/Idle.cs" id="20_rbm1n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
+radius = 72.0
+height = 255.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_liw4j"]
 font = ExtResource("9_ltyq7")
@@ -29,10 +35,6 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 20
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
-radius = 72.0
-height = 255.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movementComponent", "gravityComponent", "healthComponent", "inputComponent", "body")]
 collision_layer = 2
@@ -69,6 +71,9 @@ position = Vector2(128, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 texture = ExtResource("6_0kr2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_14w2p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -191,8 +196,15 @@ pivot_offset = Vector2(100, 16)
 show_percentage = false
 script = ExtResource("12_7bet3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_14w2p")
+[node name="CurrentState" type="Label" parent="ReloadBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = -32.0
+offset_right = 128.0
+metadata/_edit_use_anchors_ = true
 
 [node name="InputComponent" parent="." instance=ExtResource("12_1gkp0")]
 
@@ -205,6 +217,13 @@ moveSpeed = 400.0
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("19_l8h88")
+initialState = NodePath("Stand")
+
+[node name="Stand" type="Node" parent="StateMachine"]
+script = ExtResource("20_rbm1n")
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
 [connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="ReloadBar/ProgressBar" method="Deactivate"]
