@@ -19,8 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/States/Idle.cs" id="20_rbm1n"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/States/Running.cs" id="21_psa0m"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Idle.cs" id="20_rbm1n"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Running.cs" id="21_psa0m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
 radius = 72.0
@@ -224,6 +224,8 @@ moveSpeed = 400.0
 
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
 
+[node name="JumpComponent" type="Node" parent="."]
+
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "currentStateLabel")]
@@ -238,6 +240,12 @@ player = NodePath("../..")
 [node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("21_psa0m")
 player = NodePath("../..")
+
+[node name="Jumping" type="Node" parent="StateMachine"]
+
+[node name="Diving" type="Node" parent="StateMachine"]
+
+[node name="Crawling" type="Node" parent="StateMachine"]
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
 [connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Deactivate"]
