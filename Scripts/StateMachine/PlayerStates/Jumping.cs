@@ -32,6 +32,7 @@ public partial class Jumping : PlayerState
         else if(player.inputComponent.inputVector.Y > 0)
         {
             //The player is trying to dive out of the state
+            EmitSignal("Finished", "Diving");
         }
 
     }

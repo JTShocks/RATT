@@ -3,11 +3,13 @@ using System;
 
 public partial class MovementComponent : Node
 {
+
+	const float BASE_MOVE_SPEED = 200f;
 	[ExportSubgroup("Settings")]
 	[Export] float moveSpeed = 200;
 	public float movementDirection;
 
-	public void HandleHorizontalMovement(CharacterBody2D body, float direction)
+	public void HandleHorizontalMovement(CharacterBody2D body, float direction, float speed = 0)
 	{
 
 		if(direction > 0 )
@@ -19,6 +21,16 @@ public partial class MovementComponent : Node
 			direction = -1;
 		}
 		movementDirection = direction;
-		body.Velocity = body.Velocity with {X = direction * moveSpeed};
+
+
+		//If there is no speed inputed, use the component's set movespeed
+
+		if(speed == 0)
+		{
+			speed = moveSpeed;
+		}
+
+		
+		body.Velocity = body.Velocity with {X = direction * speed};
 	}
 }

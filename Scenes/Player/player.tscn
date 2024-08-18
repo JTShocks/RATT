@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=36 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -24,6 +24,9 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Running.cs" id="21_psa0m"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Jumping.cs" id="23_xvanv"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Prone.cs" id="24_8nqjn"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Crawling.cs" id="25_7koa4"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Diving.cs" id="26_xm25v"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Sliding.cs" id="27_fijv4"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c3e2y"]
 animation = &"Idle"
@@ -253,7 +256,7 @@ metadata/_edit_use_anchors_ = true
 MaxHealth = 100.0
 
 [node name="MovementComponent" parent="." instance=ExtResource("14_g1t3g")]
-moveSpeed = 400.0
+moveSpeed = 500.0
 
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
 
@@ -279,8 +282,15 @@ script = ExtResource("23_xvanv")
 script = ExtResource("24_8nqjn")
 
 [node name="Crawling" type="Node" parent="StateMachine"]
+script = ExtResource("25_7koa4")
 
 [node name="Diving" type="Node" parent="StateMachine"]
+script = ExtResource("26_xm25v")
+diveForce = 1000.0
+
+[node name="Sliding" type="Node" parent="StateMachine"]
+script = ExtResource("27_fijv4")
+slideFriction = 0.05
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
 [connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Deactivate"]

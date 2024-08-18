@@ -20,13 +20,9 @@ public partial class Prone : PlayerState
 
         if(player.inputComponent.inputHorizontal != 0)
         {
-            EmitSignal("Finshed", "Crawling");
+            EmitSignal("Finished", "Crawling");
         }
-        else if(player.inputComponent.GetJumpInput())
-        {
-            EmitSignal("Finished", "Jumping");
-        }
-        else if(player.inputComponent.inputVector.Y < -1)
+        else if(Mathf.IsEqualApprox(player.inputComponent.inputVector.Y, 0.0f))
         {
             EmitSignal("Finished", "Idle");
         }

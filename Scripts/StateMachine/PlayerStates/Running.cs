@@ -33,6 +33,10 @@ public partial class Running : PlayerState
         {
             EmitSignal("Finished", "Idle");
         }
+        else if(player.inputComponent.inputVector.Y > 0)
+        {
+            EmitSignal("Finished", "Sliding");
+        }
         
     }
 }
