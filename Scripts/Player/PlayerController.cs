@@ -18,6 +18,7 @@ public partial class PlayerController : CharacterBody2D
 	[Export] public GravityComponent gravityComponent;
 	[Export] HealthComponent healthComponent;
 	[Export] public InputComponent inputComponent;
+	[Export] public JumpComponent jumpComponent;
 
 	[Export] Node2D body;
 

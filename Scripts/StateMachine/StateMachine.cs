@@ -46,7 +46,6 @@ public partial class StateMachine : Node
         var previousStatePath = state.Name;
         state.OnExit();
         state =  GetNode<State>(targetStatePath);
-
         state.OnEnter(previousStatePath);
     }
 

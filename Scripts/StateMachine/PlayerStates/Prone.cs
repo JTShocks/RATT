@@ -1,13 +1,15 @@
 using Godot;
 using System;
 
-public partial class Idle : PlayerState
+public partial class Prone : PlayerState
 {
-    public override void OnEnter(string previousStatePath)
+
+    //Similar to the idle state, but leads into different motions
+     public override void OnEnter(string previousStatePath)
     {
         base.OnEnter(previousStatePath);
         player.Velocity = player.Velocity with { X = 0};
-        //player.animator.Play("Idle")
+        //player.animator.Play("Prone")
 
 
     }
@@ -18,15 +20,15 @@ public partial class Idle : PlayerState
 
         if(player.inputComponent.inputHorizontal != 0)
         {
-            EmitSignal(SignalName.Finished, "Running");
+            EmitSignal("Finshed", "Crawling");
         }
         else if(player.inputComponent.GetJumpInput())
         {
             EmitSignal("Finished", "Jumping");
         }
-        else if(player.inputComponent.inputVector.Y > 0)
+        else if(player.inputComponent.inputVector.Y < -1)
         {
-            EmitSignal("Finished", "Prone");
+            EmitSignal("Finished", "Idle");
         }
     }
 

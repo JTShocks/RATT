@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=33 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -18,9 +18,32 @@
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
+[ext_resource type="PackedScene" uid="uid://df6e0kul18444" path="res://Scenes/Components/jump_component.tscn" id="19_6h1pk"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Idle.cs" id="20_rbm1n"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Running.cs" id="21_psa0m"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Jumping.cs" id="23_xvanv"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Prone.cs" id="24_8nqjn"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c3e2y"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6pxja"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mt8jd"]
+states/Idle/node = SubResource("AnimationNodeAnimation_c3e2y")
+states/Idle/position = Vector2(386, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_6pxja")]
+
+[sub_resource type="Animation" id="Animation_5sxui"]
+resource_name = "Idle"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgxuy"]
+_data = {
+"Idle": SubResource("Animation_5sxui")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
 radius = 72.0
@@ -37,7 +60,7 @@ font_size = 20
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movementComponent", "gravityComponent", "healthComponent", "inputComponent", "body")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movementComponent", "gravityComponent", "healthComponent", "inputComponent", "jumpComponent", "body")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_26cdu")
@@ -48,7 +71,17 @@ movementComponent = NodePath("MovementComponent")
 gravityComponent = NodePath("GravityComponent")
 healthComponent = NodePath("HealthComponent")
 inputComponent = NodePath("InputComponent")
+jumpComponent = NodePath("JumpComponent")
 body = NodePath("Body")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_mt8jd")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jgxuy")
+}
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -224,7 +257,7 @@ moveSpeed = 400.0
 
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
 
-[node name="JumpComponent" type="Node" parent="."]
+[node name="JumpComponent" parent="." instance=ExtResource("19_6h1pk")]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
@@ -233,19 +266,21 @@ script = ExtResource("19_l8h88")
 initialState = NodePath("Idle")
 currentStateLabel = NodePath("../PlayerUi/CurrentState")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("20_rbm1n")
-player = NodePath("../..")
 
-[node name="Running" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource("21_psa0m")
-player = NodePath("../..")
 
 [node name="Jumping" type="Node" parent="StateMachine"]
+script = ExtResource("23_xvanv")
 
-[node name="Diving" type="Node" parent="StateMachine"]
+[node name="Prone" type="Node" parent="StateMachine"]
+script = ExtResource("24_8nqjn")
 
 [node name="Crawling" type="Node" parent="StateMachine"]
+
+[node name="Diving" type="Node" parent="StateMachine"]
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
 [connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Deactivate"]

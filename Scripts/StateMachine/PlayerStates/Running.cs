@@ -27,11 +27,11 @@ public partial class Running : PlayerState
         }
         else if(player.inputComponent.GetJumpInput())
         {
-            //EmitSignal(SignalName.Finished, "Jumping");
+            EmitSignal(SignalName.Finished, "Jumping");
         }
         else if(Mathf.IsEqualApprox(player.inputComponent.inputVector.X, 0.0f))
         {
-            EmitSignal("Finished", "Running");
+            EmitSignal("Finished", "Idle");
         }
         
     }
