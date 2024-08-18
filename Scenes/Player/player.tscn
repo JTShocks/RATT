@@ -261,6 +261,7 @@ moveSpeed = 500.0
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
 
 [node name="JumpComponent" parent="." instance=ExtResource("19_6h1pk")]
+jumpForce = 500.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 

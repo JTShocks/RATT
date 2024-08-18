@@ -19,7 +19,7 @@ public partial class GravityComponent : Node
 
 		if(isFalling)
 		{
-			gravityScale = 2;
+			gravityScale = 3;
 		}
 		else
 		{
