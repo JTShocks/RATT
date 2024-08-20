@@ -41,24 +41,23 @@ public partial class Enemy : CharacterBody2D
 	}
 
 
-
-	public void OnGainAwareness()
-	{
-
-	}
-
-	public void TakeDamage(float damage, bool isCritical)
+	public void TakeDamage(float damage, HurtboxComponent hurtbox)
 	{
 		float outputDamage = damage;
-		if(isCritical)
+		//Is the hurtbox that got hit a critical spot
+		if(hurtbox.IsCriticalZone)
 		{
 			outputDamage *= CriticalDamageMultiplier;
+
+			//Check if the enemy's current state is sleeping. If YES, then take even more damage.
 			if(stateMachine.state is Sleeping)
 			{
 				outputDamage *= CriticalDamageMultiplier;
 			}
 		}
 
+
+		//Output the damage to the health component
 		healthComponent.Damage(outputDamage);
 	}
 

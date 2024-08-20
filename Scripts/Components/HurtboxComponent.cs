@@ -4,13 +4,13 @@ using System;
 public partial class HurtboxComponent : Area2D
 {
 
-	[Export] bool IsCriticalZone;
+	[Export] public bool IsCriticalZone {get; private set;}
 	[Export] int CriticalDamageMultiplier = 2;
 	[Export] int DamageReduction = 0;
 
 
 
-  public event Action<float, bool> OnTakeDamage;
+  public event Action<float, HurtboxComponent> OnTakeDamage;
 
 
 
@@ -23,7 +23,7 @@ public partial class HurtboxComponent : Area2D
 
     public void OnGetHit(float damage)
     {
-      OnTakeDamage.Invoke(damage, IsCriticalZone);
+      OnTakeDamage.Invoke(damage, this);
 
     }
 
