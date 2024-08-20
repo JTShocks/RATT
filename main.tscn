@@ -25,7 +25,7 @@ sources/0 = SubResource("TileSetAtlasSource_tp7d0")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 offset = Vector2(0, -160)
-zoom = Vector2(0.75, 0.75)
+zoom = Vector2(0.8, 0.8)
 script = ExtResource("1_jqhe3")
 maxOffset = Vector2(50, 10)
 target = NodePath("../Player")

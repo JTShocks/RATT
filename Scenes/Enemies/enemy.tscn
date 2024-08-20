@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://xum7rhca880m"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyController.cs" id="1_uv5jf"]
+[ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="2_0rhap"]
+[ext_resource type="PackedScene" uid="uid://bjox01khqc1mj" path="res://Scenes/Components/hurtbox_component.tscn" id="3_nq5ey"]
+[ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="4_mhwid"]
+[ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="5_2lh6j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mot1i"]
+radius = 64.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vsve5"]
+radius = 64.0
+height = 256.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_uv5jf")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_0rhap")]
+MaxHealth = 100.0
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_nq5ey")]
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -64)
+shape = SubResource("CircleShape2D_mot1i")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="GravityComponent" parent="." instance=ExtResource("4_mhwid")]
+
+[node name="MovementComponent" parent="." instance=ExtResource("5_2lh6j")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_vsve5")
