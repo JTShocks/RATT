@@ -257,6 +257,7 @@ MaxHealth = 100.0
 
 [node name="MovementComponent" parent="." instance=ExtResource("14_g1t3g")]
 moveSpeed = 500.0
+acceleration = 0.3
 
 [node name="GravityComponent" parent="." instance=ExtResource("17_ouhfd")]
 

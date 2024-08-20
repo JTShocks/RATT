@@ -20,8 +20,7 @@ script = ExtResource("1_y48nj")
 [node name="HealthComponent" parent="." instance=ExtResource("2_0rhap")]
 MaxHealth = 100.0
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("3_nq5ey")]
-healthComponent = NodePath("../HealthComponent")
+[node name="HurtboxComponent" parent="." instance=ExtResource("3_nq5ey")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -64)

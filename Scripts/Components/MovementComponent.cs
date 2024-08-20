@@ -7,6 +7,7 @@ public partial class MovementComponent : Node
 	const float BASE_MOVE_SPEED = 200f;
 	[ExportSubgroup("Settings")]
 	[Export] float moveSpeed = 200;
+	[Export] float acceleration = 0.5f;
 	public float movementDirection;
 
 	public void HandleHorizontalMovement(CharacterBody2D body, float direction, float speed = 0)
@@ -31,6 +32,7 @@ public partial class MovementComponent : Node
 		}
 
 		
-		body.Velocity = body.Velocity with {X = direction * speed};
+		body.Velocity = body.Velocity with {X = Mathf.Lerp(body.Velocity.X, direction * speed, acceleration)};
+		body.Velocity = body.Velocity with {X = Mathf.Clamp(body.Velocity.X, -moveSpeed, moveSpeed)};
 	}
 }
