@@ -13,14 +13,6 @@ public partial class HurtboxComponent : Area2D
   public event Action<float, HurtboxComponent> OnTakeDamage;
 
 
-
-    public override void _Ready()
-    {
-        base._Ready();
-    }
-
-
-
     public void OnGetHit(float damage)
     {
       OnTakeDamage.Invoke(damage, this);
