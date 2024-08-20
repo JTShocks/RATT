@@ -84,7 +84,7 @@ public partial class Weapon : Node2D
 
     public virtual void Fire()
 	{
-		if(CanFire)
+		if(CanFire && !isReloading)
 		{
 			EmitSignal(SignalName.OnFire);
 			AttackCooldown.Start(stats.BaseRateOfFire);
@@ -150,7 +150,6 @@ public partial class Weapon : Node2D
 
 		ReloadTimer.Start(stats.BaseReloadSpeed);
 		isReloading = true;
-		CanFire = false;
 		EmitSignal(SignalName.OnReload);
 	}
 
