@@ -9,8 +9,8 @@ public partial class HurtboxComponent : Area2D
 	[Export] int DamageReduction = 0;
 
 
-    [ExportSubgroup("Nodes")]
-    [Export] public HealthComponent healthComponent;
+
+  public event Action<float, bool> OnTakeDamage;
 
 
 
@@ -23,15 +23,7 @@ public partial class HurtboxComponent : Area2D
 
     public void OnGetHit(float damage)
     {
-
-		float incomingDamage = damage - DamageReduction;
-
-		if(IsCriticalZone)
-		{
-			incomingDamage *= CriticalDamageMultiplier;
-		}
-
-		healthComponent.Damage(incomingDamage);
+      OnTakeDamage.Invoke(damage, IsCriticalZone);
 
     }
 

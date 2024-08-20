@@ -9,7 +9,7 @@ public partial class StateMachine : Node
     [ExportSubgroup("Debug")]
     [Export] Label currentStateLabel;
 
-    State state;
+    public State state;
 
 
     public override async void _Ready()

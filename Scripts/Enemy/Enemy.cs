@@ -4,6 +4,13 @@ using System;
 public partial class Enemy : CharacterBody2D
 {
 
+	[ExportSubgroup("Nodes")]
+	[Export] public GravityComponent gravityComponent;
+	[Export] public MovementComponent movementComponent;
+	[Export] HealthComponent healthComponent;
+	[Export] StateMachine stateMachine;
+
+	float CriticalDamageMultiplier = 2f;
 
 	//Things that all enemies need to have
 	//Stats
@@ -11,7 +18,9 @@ public partial class Enemy : CharacterBody2D
 
 	//Should not know exactly what state they are in
 
-	public float currentAwareness; //How much awareness the enemies have while 
+	const float MAX_AWARENESS = 100f;
+	public float currentAwareness; //How much awareness the enemies have while
+	public bool IsAwake =>  currentAwareness >= MAX_AWARENESS;
 
 
 
@@ -19,6 +28,11 @@ public partial class Enemy : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		foreach(HurtboxComponent hurtbox in GetChildren())
+        {
+            hurtbox.OnTakeDamage += TakeDamage;
+        }
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +45,21 @@ public partial class Enemy : CharacterBody2D
 	public void OnGainAwareness()
 	{
 
+	}
+
+	public void TakeDamage(float damage, bool isCritical)
+	{
+		float outputDamage = damage;
+		if(isCritical)
+		{
+			outputDamage *= CriticalDamageMultiplier;
+			if(stateMachine.state is Sleeping)
+			{
+				outputDamage *= CriticalDamageMultiplier;
+			}
+		}
+
+		healthComponent.Damage(outputDamage);
 	}
 
 	public void Attack()
