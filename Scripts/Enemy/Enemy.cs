@@ -8,7 +8,6 @@ public partial class Enemy : CharacterBody2D
 	[Export] public GravityComponent gravityComponent;
 	[Export] public MovementComponent movementComponent;
 	[Export] HealthComponent healthComponent;
-	[Export] StateMachine stateMachine;
 
 	float CriticalDamageMultiplier = 2f;
 
@@ -21,6 +20,8 @@ public partial class Enemy : CharacterBody2D
 	const float MAX_AWARENESS = 100f;
 	public float currentAwareness; //How much awareness the enemies have while
 	public bool IsAwake =>  currentAwareness >= MAX_AWARENESS;
+
+	public bool IsVulnerable; //This determines if the enemy takes extra damage from a given state
 
 
 
@@ -53,10 +54,11 @@ public partial class Enemy : CharacterBody2D
 			outputDamage *= CriticalDamageMultiplier;
 
 			//Check if the enemy's current state is sleeping. If YES, then take even more damage.
-			if(stateMachine.state is Sleeping)
-			{
-				outputDamage *= CriticalDamageMultiplier;
-			}
+
+		}
+		if(IsVulnerable)
+		{
+			outputDamage *= CriticalDamageMultiplier;
 		}
 
 
