@@ -6,9 +6,6 @@ public partial class StateMachine : Node
 
     [Export] State initialState = null;
 
-    [ExportSubgroup("Debug")]
-    [Export] Label currentStateLabel;
-
     public State state {get; private set;}
 
 
@@ -52,7 +49,6 @@ public partial class StateMachine : Node
     public override void _Process(double delta)
     {
         state.StateProcess((float)delta);
-        currentStateLabel.Text = "State: " + state.Name;
 
     }
     public override void _PhysicsProcess(double delta)

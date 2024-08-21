@@ -47,8 +47,8 @@ public partial class Projectile : AnimatableBody2D
 
 	void OnHit(KinematicCollision2D target)
 	{
-
-		if(target.GetCollider() is HurtboxComponent hurtbox)
+		
+		if(target.GetColliderShape() is HurtboxComponent hurtbox)
 		{
 			hurtbox.OnGetHit(Damage);
 		}

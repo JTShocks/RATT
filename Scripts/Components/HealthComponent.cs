@@ -7,8 +7,6 @@ using System;
         [Signal]
         public delegate void HealthChangedEventHandler(HealthUpdate healthUpdate);
         [Signal]
-        public delegate void OnTakeDamageEventHandler();
-        [Signal]
         public delegate void DiedEventHandler();
 
         [Export]
@@ -71,7 +69,6 @@ using System;
         public void Damage(float damage, bool forceHideDamage = false)
         {
             CurrentHealth -= damage;
-            EmitSignal(SignalName.OnTakeDamage);
             //if(!suppressDamageFloat && ! forceHideDamage)
             //{
             //    currentDamageFloat = 

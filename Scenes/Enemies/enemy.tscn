@@ -1,40 +1,88 @@
-[gd_scene load_steps=9 format=3 uid="uid://xum7rhca880m"]
+[gd_scene load_steps=14 format=3 uid="uid://xum7rhca880m"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_y48nj"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="2_0rhap"]
 [ext_resource type="PackedScene" uid="uid://bjox01khqc1mj" path="res://Scenes/Components/hurtbox_component.tscn" id="3_nq5ey"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="4_mhwid"]
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="5_2lh6j"]
+[ext_resource type="Texture2D" uid="uid://bjocit41ao6px" path="res://icon.svg" id="6_5edva"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="6_twv8k"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Sleeping.cs" id="8_cxk8y"]
+[ext_resource type="Theme" uid="uid://dt2oug17jt2rj" path="res://Art/Fonts/theme_playerHud.tres" id="9_5jfjf"]
+[ext_resource type="Script" path="res://Scenes/Debug/StateDisplayGUI.cs" id="10_xjb6a"]
+[ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.cs" id="11_dglij"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_mot1i"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fegnd"]
 radius = 64.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vsve5"]
-radius = 64.0
-height = 256.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0mrx0"]
+radius = 48.0
+height = 240.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent", "stateMachine")]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_y48nj")
+gravityComponent = NodePath("GravityComponent")
+movementComponent = NodePath("MovementComponent")
+healthComponent = NodePath("HealthComponent")
+stateMachine = NodePath("StateMachine")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0.500008)
+scale = Vector2(1, 1.97656)
+texture = ExtResource("6_5edva")
+
+[node name="Head" parent="." instance=ExtResource("3_nq5ey")]
+position = Vector2(0, -91)
+shape = SubResource("CircleShape2D_fegnd")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0mrx0")
+script = ExtResource("11_dglij")
+
+[node name="GravityComponent" parent="." instance=ExtResource("4_mhwid")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_0rhap")]
 MaxHealth = 100.0
 
-[node name="HurtboxComponent" parent="." instance=ExtResource("3_nq5ey")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0, -64)
-shape = SubResource("CircleShape2D_mot1i")
-debug_color = Color(1, 0, 0, 0.419608)
-
-[node name="GravityComponent" parent="." instance=ExtResource("4_mhwid")]
-
 [node name="MovementComponent" parent="." instance=ExtResource("5_2lh6j")]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_vsve5")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("6_twv8k")
+
+[node name="Sleeping" type="Node" parent="StateMachine"]
+script = ExtResource("8_cxk8y")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control" node_paths=PackedStringArray("stateMachine")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -161.0
+offset_right = 20.0
+offset_bottom = -138.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_5jfjf")
+theme_override_font_sizes/font_size = 32
+text = "State:"
+script = ExtResource("10_xjb6a")
+stateMachine = NodePath("../../StateMachine")

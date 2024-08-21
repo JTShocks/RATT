@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=37 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/ReloadBar.cs" id="12_7bet3"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
+[ext_resource type="Script" path="res://Scenes/Debug/StateDisplayGUI.cs" id="15_2jkrs"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
 [ext_resource type="PackedScene" uid="uid://df6e0kul18444" path="res://Scenes/Components/jump_component.tscn" id="19_6h1pk"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]
@@ -233,7 +234,7 @@ pivot_offset = Vector2(100, 16)
 show_percentage = false
 script = ExtResource("12_7bet3")
 
-[node name="CurrentState" type="Label" parent="PlayerUi"]
+[node name="CurrentState" type="Label" parent="PlayerUi" node_paths=PackedStringArray("stateMachine")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -248,6 +249,8 @@ text = "State:"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+script = ExtResource("15_2jkrs")
+stateMachine = NodePath("../../StateMachine")
 metadata/_edit_use_anchors_ = true
 
 [node name="InputComponent" parent="." instance=ExtResource("12_1gkp0")]
@@ -266,10 +269,9 @@ jumpForce = 500.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "currentStateLabel")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("19_l8h88")
 initialState = NodePath("Idle")
-currentStateLabel = NodePath("../PlayerUi/CurrentState")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("20_rbm1n")

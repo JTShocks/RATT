@@ -1,11 +1,11 @@
 using Godot;
 using System;
 
-public partial class HurtboxComponent : Area2D
+[GlobalClass]
+public partial class HurtboxComponent : CollisionShape2D
 {
 
 	[Export] public bool IsCriticalZone {get; private set;}
-	[Export] int CriticalDamageMultiplier = 2;
 	[Export] int DamageReduction = 0;
 
 
@@ -16,6 +16,7 @@ public partial class HurtboxComponent : Area2D
     public void OnGetHit(float damage)
     {
       OnTakeDamage.Invoke(damage, this);
+      GD.Print(Name + " got hit! \n Owner is: " + Owner.Name);
 
     }
 

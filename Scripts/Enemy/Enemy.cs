@@ -28,9 +28,12 @@ public partial class Enemy : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		foreach(HurtboxComponent hurtbox in GetChildren())
+		foreach(HurtboxComponent hurtbox in FindChildren("*","HurtboxComponent"))
         {
+
+
             hurtbox.OnTakeDamage += TakeDamage;
+			GD.Print("Grabbed the hurtbox: " + hurtbox.Name);
         }
 
 	}
@@ -59,6 +62,7 @@ public partial class Enemy : CharacterBody2D
 
 		//Output the damage to the health component
 		healthComponent.Damage(outputDamage);
+		GD.Print(Name + " took damage!");
 	}
 
 	public void Attack()
