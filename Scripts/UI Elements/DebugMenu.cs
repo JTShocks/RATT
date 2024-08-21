@@ -16,6 +16,7 @@ public partial class DebugMenu : Control
         base._Ready();
 
         currentMap.Text = GetTree().CurrentScene.Name;
+        player = GetTree().CurrentScene.GetNode<PlayerController>("Player");
     }
 
     public override void _Process(double delta)

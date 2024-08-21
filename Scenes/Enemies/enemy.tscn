@@ -19,27 +19,18 @@ radius = 64.0
 radius = 48.0
 height = 240.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent", "stateMachine")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_y48nj")
 gravityComponent = NodePath("GravityComponent")
 movementComponent = NodePath("MovementComponent")
 healthComponent = NodePath("HealthComponent")
-stateMachine = NodePath("StateMachine")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 0.500008)
 scale = Vector2(1, 1.97656)
 texture = ExtResource("6_5edva")
-
-[node name="Head" parent="." instance=ExtResource("3_nq5ey")]
-position = Vector2(0, -91)
-shape = SubResource("CircleShape2D_fegnd")
-
-[node name="Body" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_0mrx0")
-script = ExtResource("11_dglij")
 
 [node name="GravityComponent" parent="." instance=ExtResource("4_mhwid")]
 
@@ -86,3 +77,11 @@ theme_override_font_sizes/font_size = 32
 text = "State:"
 script = ExtResource("10_xjb6a")
 stateMachine = NodePath("../../StateMachine")
+
+[node name="Head" parent="." instance=ExtResource("3_nq5ey")]
+position = Vector2(0, -91)
+shape = SubResource("CircleShape2D_fegnd")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0mrx0")
+script = ExtResource("11_dglij")

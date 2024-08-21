@@ -168,7 +168,7 @@ theme_override_fonts/font = ExtResource("8_faeif")
 theme_override_font_sizes/font_size = 32
 text = "000"
 
-[node name="Debug" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "playerPosition", "currentMap")]
+[node name="Debug" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("playerPosition", "currentMap")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -179,7 +179,6 @@ offset_right = 240.0
 offset_bottom = -100.0
 grow_vertical = 0
 script = ExtResource("9_ukkj1")
-player = NodePath("../..")
 playerPosition = NodePath("PlayerPosition")
 currentMap = NodePath("CurrentMap")
 
