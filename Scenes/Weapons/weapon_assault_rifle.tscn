@@ -1,16 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4il6rke3conk"]
+[gd_scene load_steps=6 format=3 uid="uid://d4il6rke3conk"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/Weapons/AssaultRifle.cs" id="1_yqv8m"]
 [ext_resource type="Resource" uid="uid://dux6upkjbnhvb" path="res://Resources/WeaponStats/stats_assaultRifle.tres" id="2_s8evi"]
 [ext_resource type="AudioStream" uid="uid://mv23qxbvb4bb" path="res://Art/Audio/Weapons/test_clap.mp3" id="3_pdtxh"]
 [ext_resource type="Texture2D" uid="uid://bljk6vwmkjj48" path="res://Art/Sprites/Weapons/Rifles/AssaultRifle/test_AR.png" id="4_lfh8x"]
-
-[sub_resource type="Curve" id="Curve_s20os"]
-_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_8h4gg"]
-colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0)
+[ext_resource type="PackedScene" uid="uid://chnofr6vj6xoi" path="res://Scenes/VFX/laser_sight.tscn" id="5_vkp4a"]
 
 [node name="weapon_assaultRifle" type="Node2D" node_paths=PackedStringArray("firePoint", "audioSource")]
 script = ExtResource("1_yqv8m")
@@ -27,12 +21,10 @@ texture = ExtResource("4_lfh8x")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
-[node name="Line2D" type="Line2D" parent="."]
-position = Vector2(113, 13)
-points = PackedVector2Array(-38, -4, 400, 0)
-width_curve = SubResource("Curve_s20os")
-default_color = Color(1, 0, 0, 1)
-gradient = SubResource("Gradient_8h4gg")
-
 [node name="FirePoint" type="Marker2D" parent="."]
 position = Vector2(78, 0)
+
+[node name="LaserSight" parent="." instance=ExtResource("5_vkp4a")]
+position = Vector2(75, 9)
+points = PackedVector2Array(0, 0, 1000, 0)
+maxLineLength = 1000.0
