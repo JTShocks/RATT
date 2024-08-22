@@ -57,6 +57,8 @@ wakeUpTime = 5.0
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("9_u5dd8")
 
+[node name="Stagger" type="Node" parent="StateMachine"]
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8

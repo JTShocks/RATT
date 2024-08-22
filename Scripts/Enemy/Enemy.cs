@@ -23,7 +23,7 @@ public partial class Enemy : CharacterBody2D
 
 	public bool IsVulnerable; //This determines if the enemy takes extra damage from a given state
 
-	[Export] float staggerLimit;
+	[Export] float staggerLimit = 100;
 	public float currentStagger;
 	public bool IsStaggered => currentStagger >= staggerLimit;
 
