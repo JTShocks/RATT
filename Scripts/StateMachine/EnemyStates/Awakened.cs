@@ -30,9 +30,13 @@ public partial class Awakened : EnemyState
 
         //When the enemy takes damage, go to the stagger state
 
-        if(wakeUpTimer != null && wakeUpTimer.TimeLeft == 0)
+        if(wakeUpTimer != null)
         {
-            EmitSignal("Finished", "Attack"); // Have the enemy go into the attack state
+            if(wakeUpTimer.TimeLeft == 0)
+            {
+                EmitSignal("Finished", "Attack"); // Have the enemy go into the attack state
+            }
+
         }
         else if(enemy.IsStaggered)
         {
