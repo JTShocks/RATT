@@ -20,8 +20,8 @@ public partial class Sleeping : EnemyState
 
         if(enemy.IsAwake)
         {
-            //Go to Awakened state
-            EmitSignal("Finished", "Awake");
+            //Go to WakeUp state
+            EmitSignal("Finished", "WakeUp");
         }
 
     }

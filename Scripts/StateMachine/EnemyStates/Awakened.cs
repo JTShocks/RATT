@@ -14,11 +14,12 @@ public partial class Awakened : EnemyState
 
         wakeUpTimer = new Timer()
         {
-                WaitTime = wakeUpTime
+                WaitTime = wakeUpTime,
+                OneShot = true,
+                Autostart = true,
         };
         AddChild(wakeUpTimer);
          //Have the timer delete itself when it finishes
-        wakeUpTimer.Start();
 
     }
 
@@ -30,7 +31,7 @@ public partial class Awakened : EnemyState
         //When the enemy takes damage, go to the stagger state
 
 
-        if(wakeUpTimer.TimeLeft == 0)
+        if(wakeUpTimer.TimeLeft <= 0)
         {
             wakeUpTimer.QueueFree();
             EmitSignal("Finished", "Attack"); // Have the enemy go into the attack state

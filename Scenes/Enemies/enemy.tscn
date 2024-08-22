@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xum7rhca880m"]
+[gd_scene load_steps=18 format=3 uid="uid://xum7rhca880m"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_y48nj"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="2_0rhap"]
@@ -11,15 +11,16 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Sleeping.cs" id="8_cxk8y"]
 [ext_resource type="Theme" uid="uid://dt2oug17jt2rj" path="res://Art/Fonts/theme_playerHud.tres" id="9_5jfjf"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Attack.cs" id="9_u5dd8"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Stagger.cs" id="10_ap8ta"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/StateDisplayGUI.cs" id="10_xjb6a"]
 [ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.cs" id="11_dglij"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8m83"]
+radius = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u5og5"]
 radius = 64.0
 height = 256.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_y8m83"]
-radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qwmr"]
 size = Vector2(128, 256)
@@ -50,7 +51,7 @@ script = ExtResource("6_twv8k")
 [node name="Sleeping" type="Node" parent="StateMachine"]
 script = ExtResource("8_cxk8y")
 
-[node name="Awake" type="Node" parent="StateMachine"]
+[node name="WakeUp" type="Node" parent="StateMachine"]
 script = ExtResource("8_5pf71")
 wakeUpTime = 5.0
 
@@ -58,6 +59,7 @@ wakeUpTime = 5.0
 script = ExtResource("9_u5dd8")
 
 [node name="Stagger" type="Node" parent="StateMachine"]
+script = ExtResource("10_ap8ta")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -92,15 +94,6 @@ text = "State:"
 script = ExtResource("10_xjb6a")
 stateMachine = NodePath("../../StateMachine")
 
-[node name="Body" type="StaticBody2D" parent="."]
-rotation = -3.14159
-collision_layer = 8
-collision_mask = 12
-script = ExtResource("11_dglij")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-shape = SubResource("CapsuleShape2D_u5og5")
-
 [node name="Head" parent="." instance=ExtResource("3_nq5ey")]
 position = Vector2(0, -91)
 collision_mask = 12
@@ -110,6 +103,15 @@ IsCriticalZone = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 shape = SubResource("CircleShape2D_y8m83")
 debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Body" type="StaticBody2D" parent="."]
+rotation = -3.14159
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("11_dglij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CapsuleShape2D_u5og5")
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6qwmr")
