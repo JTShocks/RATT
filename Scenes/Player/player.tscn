@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/ReloadBar.cs" id="12_7bet3"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
-[ext_resource type="Script" path="res://Scenes/Debug/StateDisplayGUI.cs" id="15_2jkrs"]
+[ext_resource type="Script" path="res://Scripts/UI Elements/StateDisplayGUI.cs" id="15_2jkrs"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
 [ext_resource type="PackedScene" uid="uid://df6e0kul18444" path="res://Scenes/Components/jump_component.tscn" id="19_6h1pk"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]

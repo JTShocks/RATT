@@ -7,7 +7,7 @@ public partial class Enemy : CharacterBody2D
 	[ExportSubgroup("Nodes")]
 	[Export] public GravityComponent gravityComponent;
 	[Export] public MovementComponent movementComponent;
-	[Export] HealthComponent healthComponent;
+	[Export] public HealthComponent healthComponent;
 
 	float CriticalDamageMultiplier = 2f;
 
@@ -23,6 +23,11 @@ public partial class Enemy : CharacterBody2D
 
 	public bool IsVulnerable; //This determines if the enemy takes extra damage from a given state
 
+	[Export] float staggerLimit;
+	public float currentStagger;
+	public bool IsStaggered => currentStagger >= staggerLimit;
+
+
 
 
 
@@ -31,11 +36,11 @@ public partial class Enemy : CharacterBody2D
 	{
 		foreach(HurtboxComponent hurtbox in FindChildren("*","HurtboxComponent"))
         {
-
-
             hurtbox.OnTakeDamage += TakeDamage;
 			GD.Print("Grabbed the hurtbox: " + hurtbox.Name);
         }
+
+		healthComponent.Died += OnDeath;
 
 	}
 
@@ -65,10 +70,17 @@ public partial class Enemy : CharacterBody2D
 		//Output the damage to the health component
 		healthComponent.Damage(outputDamage);
 		GD.Print(Name + " took damage!");
+
 	}
 
-	public void Attack()
+	public virtual void OnAttack()
 	{
 
+	}
+
+	public virtual void OnDeath()
+	{
+		GD.Print(Name + " has died.");
+		QueueFree();
 	}
 }

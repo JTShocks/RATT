@@ -68,7 +68,7 @@ texture = ExtResource("1_5w6df")
 [node name="BackHand" type="Marker2D" parent="Body"]
 position = Vector2(-128, 0)
 
-[node name="Hitbox" type="Area2D" parent="Body"]
+[node name="Hitbox" type="StaticBody2D" parent="Body"]
 collision_layer = 0
 collision_mask = 4
 

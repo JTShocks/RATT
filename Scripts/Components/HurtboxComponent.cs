@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class HurtboxComponent : CollisionShape2D
+public partial class HurtboxComponent : StaticBody2D
 {
 
 	[Export] public bool IsCriticalZone {get; private set;}
