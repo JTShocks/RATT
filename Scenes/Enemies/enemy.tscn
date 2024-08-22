@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xum7rhca880m"]
+[gd_scene load_steps=17 format=3 uid="uid://xum7rhca880m"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_y48nj"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="2_0rhap"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Awakened.cs" id="8_5pf71"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Sleeping.cs" id="8_cxk8y"]
 [ext_resource type="Theme" uid="uid://dt2oug17jt2rj" path="res://Art/Fonts/theme_playerHud.tres" id="9_5jfjf"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Attack.cs" id="9_u5dd8"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/StateDisplayGUI.cs" id="10_xjb6a"]
 [ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.cs" id="11_dglij"]
 
@@ -51,8 +52,10 @@ script = ExtResource("8_cxk8y")
 
 [node name="Awake" type="Node" parent="StateMachine"]
 script = ExtResource("8_5pf71")
+wakeUpTime = 5.0
 
 [node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("9_u5dd8")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

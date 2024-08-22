@@ -19,6 +19,7 @@ public partial class Awakened : EnemyState
         AddChild(wakeUpTimer);
 
         wakeUpTimer.Timeout += wakeUpTimer.QueueFree; //Have the timer delete itself when it finishes
+        wakeUpTimer.Start();
 
     }
 
