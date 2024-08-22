@@ -69,7 +69,13 @@ public partial class Enemy : CharacterBody2D
 
 		//Output the damage to the health component
 		healthComponent.Damage(outputDamage);
+		ChangeAwareness(100);
 		GD.Print(Name + " took damage!");
+	}
+
+	void ChangeAwareness(int value)
+	{
+		currentAwareness += value;
 
 	}
 
