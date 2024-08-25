@@ -111,14 +111,8 @@ public partial class WeaponController : Node2D
 
 		if(Input.IsActionJustPressed("Reload"))
 		{
-			try
-			{
-				ActiveWeapon.Reload();
-			}
-			catch(Exception)
-			{
-				GD.Print("Can't reload");
-			}
+
+			ActiveWeapon.Reload();
 		}
 	}
 

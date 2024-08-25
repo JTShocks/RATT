@@ -8,6 +8,9 @@ public partial class Sleeping : EnemyState
     {
         base.OnEnter(previousStatePath);
         enemy.IsVulnerable = true;
+
+        //Disable the collision for the bounding box while enemy is sleeping, so player can sneak past them
+        enemy.SetCollisionLayerValue(3, false);
         
     }
 
@@ -24,5 +27,13 @@ public partial class Sleeping : EnemyState
             EmitSignal("Finished", "WakeUp");
         }
 
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+
+        //Re-enable the collision for the enemy when they leave the Sleeping state, for any reason
+        enemy.SetCollisionLayerValue(3, true);
     }
 }

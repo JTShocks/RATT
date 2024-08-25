@@ -140,12 +140,18 @@ public partial class Weapon : Node2D
 	{
 		if(RemainingAmmo <= 0)
         {
-            throw new Exception ("Out of Ammo");
+			GD.PrintErr( Name + " is out of Ammo");
+            return; 
         }
-
-		if(isReloading)
+		else if(isReloading)
 		{
-			throw new Exception("Already reloading");
+			GD.PrintErr("Player is already reloading.");
+			return;
+		}
+		else if(CurrentAmmo == stats.BaseClipSize)
+		{
+			GD.PrintErr(Name +" is already full ammo.");
+			return;
 		}
 
 		ReloadTimer.Start(stats.BaseReloadSpeed);
