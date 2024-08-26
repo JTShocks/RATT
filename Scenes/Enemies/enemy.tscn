@@ -101,11 +101,10 @@ stateMachine = NodePath("../../StateMachine")
 position = Vector2(0, -91)
 collision_mask = 12
 collision_priority = 2.0
-IsCriticalZone = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 shape = SubResource("CircleShape2D_y8m83")
-debug_color = Color(1, 0, 0, 0.419608)
+debug_color = Color(1, 0.631373, 0, 0.470588)
 
 [node name="Body" type="StaticBody2D" parent="."]
 rotation = -3.14159
@@ -115,3 +114,4 @@ script = ExtResource("11_dglij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CapsuleShape2D_u5og5")
+debug_color = Color(0, 0, 1, 0.470588)

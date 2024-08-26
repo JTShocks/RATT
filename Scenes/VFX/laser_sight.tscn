@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://chnofr6vj6xoi"]
+[gd_scene load_steps=3 format=3 uid="uid://chnofr6vj6xoi"]
 
 [ext_resource type="Script" path="res://Scripts/Environment/LaserSight.cs" id="1_x4uis"]
+
+[sub_resource type="Gradient" id="Gradient_lc088"]
+offsets = PackedFloat32Array(0, 0.239583, 0.708333, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.631373, 0.384314, 0.384314, 0.313726, 0.509804, 0.509804, 0.509804, 0.313726, 1, 0, 0, 1)
 
 [node name="LaserSight" type="Line2D"]
 points = PackedVector2Array(0, 0, 500, 0)
 width = 5.0
-default_color = Color(1, 0, 0, 1)
+gradient = SubResource("Gradient_lc088")
+begin_cap_mode = 2
+end_cap_mode = 2
 script = ExtResource("1_x4uis")
