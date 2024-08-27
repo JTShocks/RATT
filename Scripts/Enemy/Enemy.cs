@@ -37,10 +37,10 @@ public partial class Enemy : CharacterBody2D
 	{
 
 
-		foreach(HurtboxRef reference in hurtboxController.Hurtboxes)
+		foreach(HurtboxComponent hurtbox in GetChildren())
         {
-            reference.Hurtbox.OnTakeDamage += TakeDamage;
-			GD.Print("Grabbed the hurtbox: " + reference.Hurtbox.Name);
+            hurtbox.OnTakeDamage += TakeDamage;
+			GD.Print("Grabbed the hurtbox: " + hurtbox.Name);
         }
 
 		healthComponent.Died += OnDeath;

@@ -13,11 +13,13 @@ public partial class HurtboxController : Node2D
     {
 		var properties = new Array<Dictionary>();
 
-		/*properties.Add({
-			"name" : "Hurtboxes",
-			"type" : Variant.Type.Color,
-			"usage" : 
-		});*/
+		properties.Add(new Dictionary{
+			{"name", $"Hurtboxes"},
+			{"type", (int)Variant.Type.Array},
+			{"hint", (int)PropertyHint.TypeString},
+			{"hint_string", $"{Variant.Type.Object:D}/{PropertyHint.ResourceType:D}:HurtboxRef"}
+
+		});
         return properties;
     }
 
