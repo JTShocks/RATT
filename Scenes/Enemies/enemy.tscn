@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://xum7rhca880m"]
+[gd_scene load_steps=19 format=3 uid="uid://xum7rhca880m"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/Enemy.cs" id="1_y48nj"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="2_0rhap"]
@@ -14,24 +14,26 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/EnemyStates/Stagger.cs" id="10_ap8ta"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/StateDisplayGUI.cs" id="10_xjb6a"]
 [ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.cs" id="11_dglij"]
+[ext_resource type="PackedScene" uid="uid://b8x1scsub4gmb" path="res://Scenes/Components/hurtbox_controller.tscn" id="13_21rjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qwmr"]
 size = Vector2(128, 256)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_y8m83"]
-radius = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u5og5"]
 radius = 64.0
 height = 256.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8m83"]
+radius = 64.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent", "hurtboxController")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_y48nj")
 gravityComponent = NodePath("GravityComponent")
 movementComponent = NodePath("MovementComponent")
 healthComponent = NodePath("HealthComponent")
+hurtboxController = NodePath("HurtboxController")
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6qwmr")
@@ -97,21 +99,24 @@ text = "State:"
 script = ExtResource("10_xjb6a")
 stateMachine = NodePath("../../StateMachine")
 
-[node name="Head" parent="." instance=ExtResource("3_nq5ey")]
-position = Vector2(0, -91)
-collision_mask = 12
-collision_priority = 2.0
+[node name="HurtboxController" parent="." instance=ExtResource("13_21rjw")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-shape = SubResource("CircleShape2D_y8m83")
-debug_color = Color(1, 0.631373, 0, 0.470588)
-
-[node name="Body" type="StaticBody2D" parent="."]
+[node name="Body" type="StaticBody2D" parent="HurtboxController"]
 rotation = -3.14159
 collision_layer = 8
 collision_mask = 12
 script = ExtResource("11_dglij")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxController/Body"]
 shape = SubResource("CapsuleShape2D_u5og5")
 debug_color = Color(0, 0, 1, 0.470588)
+
+[node name="Head" parent="HurtboxController" instance=ExtResource("3_nq5ey")]
+position = Vector2(0, -91)
+collision_mask = 12
+collision_priority = 2.0
+IsCriticalZone = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxController/Head"]
+shape = SubResource("CircleShape2D_y8m83")
+debug_color = Color(1, 0.631373, 0, 0.470588)

@@ -8,6 +8,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] public GravityComponent gravityComponent;
 	[Export] public MovementComponent movementComponent;
 	[Export] public HealthComponent healthComponent;
+	[Export] HurtboxController hurtboxController;
 
 	float CriticalDamageMultiplier = 2f;
 
@@ -34,10 +35,12 @@ public partial class Enemy : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		foreach(HurtboxComponent hurtbox in FindChildren("*","HurtboxComponent"))
+
+
+		foreach(HurtboxRef reference in hurtboxController.Hurtboxes)
         {
-            hurtbox.OnTakeDamage += TakeDamage;
-			GD.Print("Grabbed the hurtbox: " + hurtbox.Name);
+            reference.Hurtbox.OnTakeDamage += TakeDamage;
+			GD.Print("Grabbed the hurtbox: " + reference.Hurtbox.Name);
         }
 
 		healthComponent.Died += OnDeath;
