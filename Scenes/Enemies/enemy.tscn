@@ -18,21 +18,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qwmr"]
 size = Vector2(128, 256)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y8m83"]
-radius = 64.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u5og5"]
 radius = 64.0
 height = 256.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent", "hurtboxController")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8m83"]
+radius = 64.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("gravityComponent", "movementComponent", "healthComponent", "Hurtboxes")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_y48nj")
 gravityComponent = NodePath("GravityComponent")
 movementComponent = NodePath("MovementComponent")
 healthComponent = NodePath("HealthComponent")
-hurtboxController = NodePath("")
+Hurtboxes = NodePath("Hurtboxes")
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6qwmr")
@@ -98,22 +98,24 @@ text = "State:"
 script = ExtResource("10_xjb6a")
 stateMachine = NodePath("../../StateMachine")
 
-[node name="Head" parent="." instance=ExtResource("3_nq5ey")]
-position = Vector2(0, -91)
-collision_mask = 12
-collision_priority = 2.0
-IsCriticalZone = true
+[node name="Hurtboxes" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
-shape = SubResource("CircleShape2D_y8m83")
-debug_color = Color(1, 0.631373, 0, 0.470588)
-
-[node name="Body" type="StaticBody2D" parent="."]
+[node name="Body" type="StaticBody2D" parent="Hurtboxes"]
 rotation = -3.14159
 collision_layer = 8
 collision_mask = 12
 script = ExtResource("11_dglij")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtboxes/Body"]
 shape = SubResource("CapsuleShape2D_u5og5")
 debug_color = Color(0, 0, 1, 0.470588)
+
+[node name="Head" parent="Hurtboxes" instance=ExtResource("3_nq5ey")]
+position = Vector2(0, -91)
+collision_mask = 12
+collision_priority = 2.0
+IsCriticalZone = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtboxes/Head"]
+shape = SubResource("CircleShape2D_y8m83")
+debug_color = Color(1, 0.631373, 0, 0.470588)

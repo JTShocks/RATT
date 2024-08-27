@@ -94,6 +94,7 @@ public partial class WeaponController : Node2D
 				{
 					ActiveWeapon.Aim(); //Charge the melee weapon
 					ActiveWeapon.Charge((float)delta);
+					UpdateWeaponUI();
 				}
 
 				if(ReleasedFire)

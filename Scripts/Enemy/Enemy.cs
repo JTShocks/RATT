@@ -8,7 +8,7 @@ public partial class Enemy : CharacterBody2D
 	[Export] public GravityComponent gravityComponent;
 	[Export] public MovementComponent movementComponent;
 	[Export] public HealthComponent healthComponent;
-	[Export] HurtboxController hurtboxController;
+	[Export] Node2D Hurtboxes;
 
 	float CriticalDamageMultiplier = 2f;
 
@@ -37,7 +37,7 @@ public partial class Enemy : CharacterBody2D
 	{
 
 
-		foreach(HurtboxComponent hurtbox in GetChildren())
+		foreach(HurtboxComponent hurtbox in Hurtboxes.GetChildren())
         {
             hurtbox.OnTakeDamage += TakeDamage;
 			GD.Print("Grabbed the hurtbox: " + hurtbox.Name);
