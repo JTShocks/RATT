@@ -286,6 +286,7 @@ script = ExtResource("24_8nqjn")
 
 [node name="Crawling" type="Node" parent="StateMachine"]
 script = ExtResource("25_7koa4")
+crawlSpeed = 400.0
 
 [node name="Diving" type="Node" parent="StateMachine"]
 script = ExtResource("26_xm25v")
