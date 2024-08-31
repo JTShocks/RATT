@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.cs" id="11_dglij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qwmr"]
-size = Vector2(128, 256)
+size = Vector2(116, 256)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u5og5"]
 radius = 64.0
@@ -111,7 +111,7 @@ shape = SubResource("CapsuleShape2D_u5og5")
 debug_color = Color(0, 0, 1, 0.470588)
 
 [node name="Head" parent="Hurtboxes" instance=ExtResource("3_nq5ey")]
-position = Vector2(0, -91)
+position = Vector2(0, -109)
 collision_mask = 12
 collision_priority = 2.0
 IsCriticalZone = true

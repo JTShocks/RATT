@@ -1,4 +1,5 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
 [GlobalClass]
@@ -14,6 +15,11 @@ public partial class Weapon : Node2D
 
 	[Export] public WeaponStats stats;
 	[Export] public WeaponType weaponType;
+	//Add a "WeaponFireType" instead of just weapon type
+	//Fire Types include just Automatic, Semi-Auto, and Burst
+
+	//Weapon Type should include
+	//Projectile, Hitscan, or Melee
 
 	[Signal]
 	public delegate void OnFireEventHandler(); //Emit when the weapon is fired
@@ -97,6 +103,7 @@ public partial class Weapon : Node2D
 
 	public virtual void Shoot(Vector2 shootDirection)
 	{
+		/*
 		var projectile = GD.Load<PackedScene>("res://Scenes/Weapons/Bullet_Prefabs/bullet.tscn").Instantiate() as Projectile;
             if(projectile is Projectile bullet)
             {
@@ -108,13 +115,13 @@ public partial class Weapon : Node2D
 				bullet.Rotate(GetAngleTo(shootDirection));
                 OnShoot += bullet.Launch;
             }
+		*/
+		audioSource.Stream = shootSFX;
+		var rng = new RandomNumberGenerator();
+		float pitchShift = rng.RandfRange(.9f, 1.1f);
+		audioSource.PitchScale = pitchShift;
 
-			audioSource.Stream = shootSFX;
-			var rng = new RandomNumberGenerator();
-			float pitchShift = rng.RandfRange(.9f, 1.1f);
-			audioSource.PitchScale = pitchShift;
-
-			audioSource.Play();
+		audioSource.Play();
 
 		CurrentAmmo--;
 		EmitSignal(SignalName.OnShoot);
@@ -166,6 +173,29 @@ public partial class Weapon : Node2D
 		GD.Print("Reload finished");
 		Reset();
 	}
+
+
+	internal void CreateBulletTracer(Vector2 endPointPosition)
+	{
+		var tracer = new Line2D(){
+			Name = "Tracer",
+			Width = 4,
+			DefaultColor = Colors.White,
+			Points = [Vector2.Zero, Vector2.Zero]
+			
+		};
+        tracer.SetPointPosition(0, firePoint.GlobalPosition);
+		tracer.SetPointPosition(1, endPointPosition);
+
+		GetTree().Root.AddChild(tracer);
+
+		Tween tween = tracer.CreateTween();
+		tween.TweenProperty(tracer, "modulate:a", 0, 0.1f);
+		tween.TweenCallback(Callable.From(tracer.QueueFree));
+	}
+
+
+	
 
 
 

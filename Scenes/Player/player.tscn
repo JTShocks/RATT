@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=38 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -48,6 +48,9 @@ loop_mode = 1
 _data = {
 "Idle": SubResource("Animation_5sxui")
 }
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6c2a7"]
+polygon = PackedVector2Array(-64, 66, -69, -7, -53, -55, -27, -73, -15, -100, -26, -109, -20, -126, 1, -109, 18, -110, 76, -66, 76, -41, 22, -39, 49, 13, 50, 60, 38, 69, -4, 67, -11, 90, -24, 97, -25, 112, -3, 112, -4, 128, -61, 127, -62, 85, -68, 79, -69, 60)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
 radius = 72.0
@@ -109,6 +112,10 @@ position = Vector2(128, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 texture = ExtResource("6_0kr2v")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Body/Sprite2D"]
+position = Vector2(4, 1)
+occluder = SubResource("OccluderPolygon2D_6c2a7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_14w2p")

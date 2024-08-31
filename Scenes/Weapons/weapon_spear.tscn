@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bn73lodf25whj"]
 
 [ext_resource type="Texture2D" uid="uid://8wd3a05f85ym" path="res://Art/Sprites/Weapons/test_spear.png" id="1_5w6df"]
-[ext_resource type="Script" path="res://Scenes/Weapons/Spear.cs" id="1_t5jwi"]
+[ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/Weapons/Spear.cs" id="1_t5jwi"]
 [ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/WeaponStats/WeaponStats.cs" id="2_epc0e"]
 
 [sub_resource type="Resource" id="Resource_h1cab"]

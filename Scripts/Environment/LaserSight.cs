@@ -5,11 +5,13 @@ using System;
 public partial class LaserSight : Line2D
 {
 
-	[Export] float maxLineLength;
+	float maxLineLength;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-
+		//Get the size of the current viewport, so the line is always the same distance to the end of the screen
+		Rect2 bounds = GetViewportRect();
+		maxLineLength = bounds.Size.X;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

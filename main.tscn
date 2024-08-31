@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://l352npvwiphw"]
+[gd_scene load_steps=6 format=4 uid="uid://l352npvwiphw"]
 
 [ext_resource type="Script" path="res://Scripts/Environment/CameraController.cs" id="1_jqhe3"]
 [ext_resource type="PackedScene" uid="uid://cqqvbfhc1uj6h" path="res://Scenes/Player/player.tscn" id="1_kpxq5"]
 [ext_resource type="TileSet" uid="uid://5wrf0poq4c77" path="res://Art/Environment/tileset_labs.tres" id="3_ups4l"]
 [ext_resource type="PackedScene" uid="uid://xum7rhca880m" path="res://Scenes/Enemies/enemy.tscn" id="4_4py8j"]
+[ext_resource type="Texture2D" uid="uid://bjocit41ao6px" path="res://icon.svg" id="5_0yv36"]
 
 [node name="debug_01" type="Node2D"]
 
@@ -27,3 +28,13 @@ tile_set = ExtResource("3_ups4l")
 
 [node name="Enemy" parent="." instance=ExtResource("4_4py8j")]
 position = Vector2(938, 3)
+
+[node name="DirectionalLight2D" type="PointLight2D" parent="."]
+position = Vector2(225, -394)
+rotation = -1.14911
+color = Color(1, 0.639216, 0.101961, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color(0.133333, 0, 0.247059, 0.329412)
+texture = ExtResource("5_0yv36")
+texture_scale = 50.0
