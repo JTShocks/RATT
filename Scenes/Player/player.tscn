@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=39 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/WeaponAmmo.cs" id="5_xefa2"]
 [ext_resource type="Texture2D" uid="uid://dg5motqhcl4ib" path="res://Art/Sprites/test_rendered_player.png" id="6_0kr2v"]
 [ext_resource type="FontFile" uid="uid://cwuigyulqxaqa" path="res://Art/Fonts/StepsMono/Steps-Mono.otf" id="7_ja4hm"]
+[ext_resource type="Texture2D" uid="uid://d0mvoevldmo1q" path="res://Art/Sprites/flashlight_shape.png" id="7_wnslm"]
 [ext_resource type="FontFile" uid="uid://c41hf5ki0r0xp" path="res://Art/Fonts/StepsMono/Steps-Mono-Thin.otf" id="8_faeif"]
 [ext_resource type="FontFile" uid="uid://bg3vvhwnq5ung" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Regular.otf" id="9_ltyq7"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/DebugMenu.cs" id="9_ukkj1"]
@@ -109,6 +110,14 @@ position = Vector2(128, 0)
 visible = false
 z_index = 1
 position = Vector2(128, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="Body/WeaponController"]
+position = Vector2(479, -14)
+color = Color(1, 1, 0.301961, 1)
+energy = 0.5
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("7_wnslm")
+texture_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 texture = ExtResource("6_0kr2v")
