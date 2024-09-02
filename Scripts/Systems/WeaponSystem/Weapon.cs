@@ -51,7 +51,7 @@ public partial class Weapon : Node2D
 	[Export] public AudioStreamPlayer2D audioSource;
 
 	[ExportSubgroup("Sound Effects")]
-	[Export] AudioStream shootSFX;
+	[Export] AudioStream[] shootSFX;
 	[Export] AudioStream reloadSFX;
 
 	[ExportSubgroup("Animations")]
@@ -116,9 +116,11 @@ public partial class Weapon : Node2D
                 OnShoot += bullet.Launch;
             }
 		*/
-		audioSource.Stream = shootSFX;
 		var rng = new RandomNumberGenerator();
-		float pitchShift = rng.RandfRange(.9f, 1.1f);
+		int shootSound = rng.RandiRange(0, shootSFX.Length-1);
+		audioSource.Stream = shootSFX[shootSound];
+
+		float pitchShift = rng.RandfRange(.95f, 1.0f);
 		audioSource.PitchScale = pitchShift;
 
 		audioSource.Play();

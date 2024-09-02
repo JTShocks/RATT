@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
 [ext_resource type="PackedScene" uid="uid://d4il6rke3conk" path="res://Scenes/Weapons/weapon_assault_rifle.tscn" id="3_3obop"]
-[ext_resource type="AudioStream" uid="uid://b4bet1dbq7nfk" path="res://Art/Audio/Weapons/test_pop.mp3" id="4_7cs3v"]
 [ext_resource type="PackedScene" uid="uid://bi50so2vw14vh" path="res://Scenes/Weapons/weapon_revolver.tscn" id="4_8g050"]
+[ext_resource type="AudioStream" uid="uid://v3n67a5qncwh" path="res://Art/Audio/Weapons/subMachine_shot2.wav" id="4_g2lut"]
 [ext_resource type="PackedScene" uid="uid://bn73lodf25whj" path="res://Scenes/Weapons/weapon_spear.tscn" id="5_o2tbf"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/WeaponAmmo.cs" id="5_xefa2"]
 [ext_resource type="Texture2D" uid="uid://dg5motqhcl4ib" path="res://Art/Sprites/test_rendered_player.png" id="6_0kr2v"]
@@ -99,12 +99,13 @@ ActiveWeapon = NodePath("weapon_assaultRifle")
 [node name="weapon_assaultRifle" parent="Body/WeaponController" instance=ExtResource("3_3obop")]
 z_index = 1
 position = Vector2(77, -32)
-shootSFX = ExtResource("4_7cs3v")
+shootSFX = Array[AudioStream]([ExtResource("4_g2lut")])
 
 [node name="weapon_revolver" parent="Body/WeaponController" instance=ExtResource("4_8g050")]
 visible = false
 z_index = 1
 position = Vector2(128, 0)
+shootSFX = null
 
 [node name="weapon_spear" parent="Body/WeaponController" instance=ExtResource("5_o2tbf")]
 visible = false
@@ -112,11 +113,12 @@ z_index = 1
 position = Vector2(128, 0)
 
 [node name="PointLight2D" type="PointLight2D" parent="Body/WeaponController"]
-position = Vector2(479, -14)
 color = Color(1, 1, 0.301961, 1)
 energy = 0.5
+shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("7_wnslm")
+offset = Vector2(480, -32)
 texture_scale = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
@@ -125,6 +127,7 @@ texture = ExtResource("6_0kr2v")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Body/Sprite2D"]
 position = Vector2(4, 1)
 occluder = SubResource("OccluderPolygon2D_6c2a7")
+occluder_light_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_14w2p")
