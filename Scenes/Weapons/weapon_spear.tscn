@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn73lodf25whj"]
+[gd_scene load_steps=12 format=3 uid="uid://bn73lodf25whj"]
 
 [ext_resource type="Texture2D" uid="uid://8wd3a05f85ym" path="res://Art/Sprites/Weapons/test_spear.png" id="1_5w6df"]
 [ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/Weapons/Spear.cs" id="1_t5jwi"]
@@ -55,6 +55,24 @@ _data = {
 "Attack": SubResource("Animation_eg2sr")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5eu7a"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wno7e"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_m40g5"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_i6vk5"]
+graph_offset = Vector2(-560.062, 0)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_wno7e")
+nodes/Animation/position = Vector2(-220, 80)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5eu7a")
+"nodes/Animation 2/position" = Vector2(-240, 260)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_m40g5")
+nodes/Blend2/position = Vector2(40, 180)
+node_connections = [&"Blend2", 0, &"Animation", &"Blend2", 1, &"Animation 2", &"output", 0, &"Blend2"]
+
 [node name="weapon_spear" type="Node2D" node_paths=PackedStringArray("animator")]
 script = ExtResource("1_t5jwi")
 stats = SubResource("Resource_h1cab")
@@ -82,3 +100,8 @@ disabled = true
 libraries = {
 "": SubResource("AnimationLibrary_fi5pk")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_i6vk5")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 0.0

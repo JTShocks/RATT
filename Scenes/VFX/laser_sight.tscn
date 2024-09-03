@@ -4,7 +4,7 @@
 
 [sub_resource type="Gradient" id="Gradient_lc088"]
 offsets = PackedFloat32Array(0, 0.609195, 0.982759)
-colors = PackedColorArray(1, 0, 0, 1, 0.631373, 0.384314, 0.384314, 0.313726, 0.631373, 0.384314, 0.384314, 0)
+colors = PackedColorArray(0, 1, 0, 1, 0.631373, 0.384314, 0.384314, 0.313726, 0.631373, 0.384314, 0.384314, 0)
 
 [node name="LaserSight" type="Line2D"]
 points = PackedVector2Array(0, 0, 1080, 0)
