@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://4sq6ir70jhof"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/ActiveObjects/Elevator.cs" id="1_mdsb0"]
+[ext_resource type="Texture2D" uid="uid://b4jxmoh4ejxqd" path="res://Art/Sprites/test_elevatorBase.png" id="2_81iyn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_20f3a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o02gp"]
+size = Vector2(192, 32)
+
+[node name="Elevator" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_mdsb0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_81iyn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_20f3a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1.5, 177)
+shape = SubResource("RectangleShape2D_o02gp")

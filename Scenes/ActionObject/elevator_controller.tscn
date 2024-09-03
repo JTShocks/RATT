@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wwiuw6svaj0d"]
+
+[ext_resource type="Texture2D" uid="uid://hfufonsgni5k" path="res://Art/Sprites/test_elevatorShaft.png" id="1_8hvru"]
+[ext_resource type="Script" path="res://Scripts/Environment/ActiveObjects/ElevatorController.cs" id="1_pyi3q"]
+
+[node name="ElevatorController" type="Node2D"]
+script = ExtResource("1_pyi3q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8hvru")

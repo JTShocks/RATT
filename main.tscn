@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=4 uid="uid://l352npvwiphw"]
+[gd_scene load_steps=9 format=4 uid="uid://l352npvwiphw"]
 
 [ext_resource type="Script" path="res://Scripts/Environment/CameraController.cs" id="1_jqhe3"]
 [ext_resource type="PackedScene" uid="uid://cqqvbfhc1uj6h" path="res://Scenes/Player/player.tscn" id="1_kpxq5"]
 [ext_resource type="TileSet" uid="uid://5wrf0poq4c77" path="res://Art/Environment/tileset_labs.tres" id="3_ups4l"]
 [ext_resource type="PackedScene" uid="uid://xum7rhca880m" path="res://Scenes/Enemies/enemy.tscn" id="4_4py8j"]
 [ext_resource type="Texture2D" uid="uid://qfl8t565c4e4" path="res://Art/Sprites/test_lightCircle.png" id="5_5c1qy"]
+[ext_resource type="PackedScene" uid="uid://4sq6ir70jhof" path="res://Scenes/ActionObject/elevator.tscn" id="6_pw2s3"]
+[ext_resource type="PackedScene" uid="uid://wwiuw6svaj0d" path="res://Scenes/ActionObject/elevator_controller.tscn" id="6_v5uip"]
+
+[sub_resource type="Curve2D" id="Curve2D_gmhro"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 640)
+}
+point_count = 2
 
 [node name="debug_01" type="Node2D"]
 
@@ -28,6 +36,18 @@ tile_set = ExtResource("3_ups4l")
 
 [node name="Enemy" parent="." instance=ExtResource("4_4py8j")]
 position = Vector2(938, 3)
+
+[node name="ElevatorController" parent="." instance=ExtResource("6_v5uip")]
+position = Vector2(2317, -23)
+
+[node name="Path2D" type="Path2D" parent="ElevatorController"]
+curve = SubResource("Curve2D_gmhro")
+
+[node name="Elevator" parent="ElevatorController/Path2D" instance=ExtResource("6_pw2s3")]
+position = Vector2(0, 640)
+progress = 640.0
+moveSpeed = 100.0
+startAtBottom = true
 
 [node name="DirectionalLight2D" type="PointLight2D" parent="."]
 position = Vector2(931, -255)
