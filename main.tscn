@@ -26,6 +26,21 @@ maxOffset = Vector2(50, 10)
 target = NodePath("../Player")
 shakeMinMax = Vector2(0, 0.5)
 
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_5c1qy")
+
 [node name="Main" type="TileMapLayer" parent="."]
 position = Vector2(5, 0)
 
@@ -45,7 +60,6 @@ curve = SubResource("Curve2D_gmhro")
 
 [node name="Elevator" parent="ElevatorController/Path2D" instance=ExtResource("6_pw2s3")]
 moveSpeed = 100.0
-startAtBottom = true
 
 [node name="DirectionalLight2D" type="PointLight2D" parent="."]
 position = Vector2(931, -255)
