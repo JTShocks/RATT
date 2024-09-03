@@ -9,7 +9,9 @@ public partial class Elevator : PathFollow2D
 	[Export] bool startAtBottom;
 	//Elevator should not have a reference to it's switch, that should only be done during the scene
 	bool isMoving;
-	Area2D elevatorZone;
+	[Export] Area2D elevatorZone;
+
+	StaticBody2D body;
 	Vector2 moveDirection = Vector2.Down;
 	// Called when the node enters the scene tree for the first time.
 
@@ -24,6 +26,8 @@ public partial class Elevator : PathFollow2D
 		elevatorZone.BodyEntered += OnPlayerEnterElevator;
 		elevatorZone.BodyExited += OnPlayerExitElevator;
 
+		body = GetNode<StaticBody2D>("StaticBody2D");
+
 		if(startAtBottom)
 		{
 			ProgressRatio = 1;
@@ -32,7 +36,7 @@ public partial class Elevator : PathFollow2D
 		{
 			ProgressRatio = 0;
 		}
-		Start();
+		
 
 
 	}
@@ -60,6 +64,7 @@ public partial class Elevator : PathFollow2D
 		{
 			//move the elevator up
 			moveDirection = Vector2.Up;
+
 		}
 		else
 		{
@@ -67,12 +72,14 @@ public partial class Elevator : PathFollow2D
 			moveDirection = Vector2.Down;
 		}
 		isMoving = true;
+		body.ConstantLinearVelocity = moveDirection * moveSpeed;
 
 	}
 
 	public void Stop()
 	{
 		isMoving = false;
+		body.ConstantLinearVelocity = Vector2.Zero;
 	}
 
 	public void OnPlayerEnterElevator(Node2D body)
@@ -82,7 +89,8 @@ public partial class Elevator : PathFollow2D
 			player = p;
 			//Save the current player in the elevator
 
-			PlayerEnteredElevator.Invoke();
+			//PlayerEnteredElevator.Invoke();
+			Start();
 		}
 	}
 	public void OnPlayerExitElevator(Node2D body)
@@ -90,7 +98,7 @@ public partial class Elevator : PathFollow2D
 		if(body is PlayerController p)
 		{
 			//What happens when the player leaves the elevator range
-			PlayerExitedElevator.Invoke();
+			//PlayerExitedElevator.Invoke();
 		}
 	}
 }

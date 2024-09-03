@@ -38,14 +38,12 @@ tile_set = ExtResource("3_ups4l")
 position = Vector2(938, 3)
 
 [node name="ElevatorController" parent="." instance=ExtResource("6_v5uip")]
-position = Vector2(2317, -23)
+position = Vector2(2280, -32)
 
 [node name="Path2D" type="Path2D" parent="ElevatorController"]
 curve = SubResource("Curve2D_gmhro")
 
 [node name="Elevator" parent="ElevatorController/Path2D" instance=ExtResource("6_pw2s3")]
-position = Vector2(0, 640)
-progress = 640.0
 moveSpeed = 100.0
 startAtBottom = true
 

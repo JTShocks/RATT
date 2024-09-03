@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Environment/ActiveObjects/ElevatorController.cs" id="1_pyi3q"]
 
 [node name="ElevatorController" type="Node2D"]
+z_index = -1
 script = ExtResource("1_pyi3q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
