@@ -108,3 +108,8 @@ Interact={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Entities"
 2d_physics/layer_4="Hurtboxes"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+viewport/hdr_2d=true

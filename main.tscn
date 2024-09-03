@@ -17,6 +17,7 @@ point_count = 2
 [node name="debug_01" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_kpxq5")]
+position = Vector2(2, -86)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 offset = Vector2(0, -160)
