@@ -28,6 +28,7 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://Art/Sprites/cursor.png"
+mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 
 [dotnet]
 
