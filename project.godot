@@ -21,6 +21,8 @@ config/icon="res://Art/Sprites/icon_RATT_fileIcon.png"
 
 GameManager="*res://Globals/GameManager.cs"
 GlobalSignals="*res://Globals/GlobalSignals.cs"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [display]
 
@@ -33,6 +35,10 @@ mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 [dotnet]
 
 project/assembly_name="ProjectRWG"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 
 [input]
 
@@ -108,8 +114,8 @@ Interact={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Entities"
 2d_physics/layer_4="Hurtboxes"
+2d_physics/layer_5="Interactable"
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 viewport/hdr_2d=true

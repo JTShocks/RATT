@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=39 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dg5motqhcl4ib" path="res://Art/Sprites/test_rendered_player.png" id="6_0kr2v"]
 [ext_resource type="AudioStream" uid="uid://dqyikf4utpgjg" path="res://Art/Audio/Weapons/subMachine_shot1.wav" id="6_n6xg2"]
 [ext_resource type="FontFile" uid="uid://cwuigyulqxaqa" path="res://Art/Fonts/StepsMono/Steps-Mono.otf" id="7_ja4hm"]
-[ext_resource type="Texture2D" uid="uid://d0mvoevldmo1q" path="res://Art/Sprites/flashlight_shape.png" id="7_wnslm"]
 [ext_resource type="FontFile" uid="uid://c41hf5ki0r0xp" path="res://Art/Fonts/StepsMono/Steps-Mono-Thin.otf" id="8_faeif"]
 [ext_resource type="AudioStream" uid="uid://mv23qxbvb4bb" path="res://Art/Audio/Weapons/test_clap.mp3" id="8_wx7d3"]
 [ext_resource type="FontFile" uid="uid://bg3vvhwnq5ung" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Regular.otf" id="9_ltyq7"]
@@ -51,9 +50,6 @@ loop_mode = 1
 _data = {
 "Idle": SubResource("Animation_5sxui")
 }
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6c2a7"]
-polygon = PackedVector2Array(-64, 66, -69, -7, -53, -55, -27, -73, -15, -100, -26, -109, -20, -126, 1, -109, 18, -110, 76, -66, 76, -41, 22, -39, 49, 13, 50, 60, 38, 69, -4, 67, -11, 90, -24, 97, -25, 112, -3, 112, -4, 128, -61, 127, -62, 85, -68, 79, -69, 60)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14w2p"]
 radius = 72.0
@@ -117,22 +113,8 @@ z_index = 1
 position = Vector2(128, 0)
 shootSFX = Array[AudioStream]([ExtResource("8_wx7d3")])
 
-[node name="PointLight2D" type="PointLight2D" parent="Body/WeaponController"]
-color = Color(1, 1, 0.301961, 1)
-energy = 0.5
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("7_wnslm")
-offset = Vector2(480, -32)
-texture_scale = 2.0
-
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
 texture = ExtResource("6_0kr2v")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Body/Sprite2D"]
-position = Vector2(4, 1)
-occluder = SubResource("OccluderPolygon2D_6c2a7")
-occluder_light_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 32)
