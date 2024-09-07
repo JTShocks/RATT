@@ -1,13 +1,13 @@
-[gd_scene load_steps=39 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=41 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
+[ext_resource type="Texture2D" uid="uid://kcvtdhwg48h" path="res://Art/Sprites/Player/ratt_textureSheet.png" id="2_bwcca"]
 [ext_resource type="PackedScene" uid="uid://seyg6foc3630" path="res://Scenes/Components/weapon_controller.tscn" id="2_snfsn"]
 [ext_resource type="PackedScene" uid="uid://d4il6rke3conk" path="res://Scenes/Weapons/weapon_assault_rifle.tscn" id="3_3obop"]
 [ext_resource type="PackedScene" uid="uid://bi50so2vw14vh" path="res://Scenes/Weapons/weapon_revolver.tscn" id="4_8g050"]
 [ext_resource type="AudioStream" uid="uid://v3n67a5qncwh" path="res://Art/Audio/Weapons/subMachine_shot2.wav" id="4_g2lut"]
 [ext_resource type="PackedScene" uid="uid://bn73lodf25whj" path="res://Scenes/Weapons/weapon_spear.tscn" id="5_o2tbf"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/WeaponAmmo.cs" id="5_xefa2"]
-[ext_resource type="Texture2D" uid="uid://dg5motqhcl4ib" path="res://Art/Sprites/test_rendered_player.png" id="6_0kr2v"]
 [ext_resource type="AudioStream" uid="uid://dqyikf4utpgjg" path="res://Art/Audio/Weapons/subMachine_shot1.wav" id="6_n6xg2"]
 [ext_resource type="FontFile" uid="uid://cwuigyulqxaqa" path="res://Art/Fonts/StepsMono/Steps-Mono.otf" id="7_ja4hm"]
 [ext_resource type="FontFile" uid="uid://c41hf5ki0r0xp" path="res://Art/Fonts/StepsMono/Steps-Mono-Thin.otf" id="8_faeif"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://bg3vvhwnq5ung" path="res://Art/Fonts/Office Code Pro/OTF/OfficeCodePro-Regular.otf" id="9_ltyq7"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/DebugMenu.cs" id="9_ukkj1"]
 [ext_resource type="Theme" uid="uid://dt2oug17jt2rj" path="res://Art/Fonts/theme_playerHud.tres" id="10_1ejha"]
+[ext_resource type="Texture2D" uid="uid://bwm0n0aqovyip" path="res://Art/Sprites/Player/player_bodyPosRef.png" id="10_um7uk"]
 [ext_resource type="PackedScene" uid="uid://cwa10wbdj26qq" path="res://Scenes/Components/input_component.tscn" id="12_1gkp0"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/Player HUD/ReloadBar.cs" id="12_7bet3"]
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
@@ -30,6 +31,9 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Crawling.cs" id="25_7koa4"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Diving.cs" id="26_xm25v"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Sliding.cs" id="27_fijv4"]
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_nr7m8"]
+modification_count = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c3e2y"]
 animation = &"Idle"
@@ -80,6 +84,107 @@ inputComponent = NodePath("InputComponent")
 jumpComponent = NodePath("JumpComponent")
 body = NodePath("Body")
 
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+modification_stack = SubResource("SkeletonModificationStack2D_nr7m8")
+
+[node name="Hip" type="Bone2D" parent="Skeleton2D"]
+position = Vector2(0, 53)
+
+[node name="Neck" type="Bone2D" parent="Skeleton2D/Hip"]
+position = Vector2(0, -53)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+
+[node name="Polygon2D" type="Polygon2D" parent="Skeleton2D/Hip/Neck"]
+z_index = -2
+position = Vector2(-64, -33)
+scale = Vector2(1, 1)
+texture = ExtResource("2_bwcca")
+skeleton = NodePath("../../..")
+polygon = PackedVector2Array(40.5406, 0.531384, 95.3349, 8.0779, 103.21, 48.1073, 119.943, 87.4804, 112.397, 120.62, 80.57, 128.166, 39.5563, 119.963, 8.38585, 102.245, -0.144989, 62.8722, 16.2605, 16.2806, 84.2821, 50.1397, 102.344, 88.5591, 80.0675, 15.7196, 32.0982, 39.6116, 39.6918, 79.802, 48.3967, 15.3492)
+uv = PackedVector2Array(40.5406, 0.531384, 95.3349, 8.0779, 103.21, 48.1073, 119.943, 87.4804, 112.397, 120.62, 80.57, 128.166, 39.5563, 119.963, 8.38585, 102.245, -0.144989, 62.8722, 16.2605, 16.2806, 84.2821, 50.1397, 102.344, 88.5591, 80.0675, 15.7196, 32.0982, 39.6116, 39.6918, 79.802, 48.3967, 15.3492)
+polygons = [PackedInt32Array(2, 10, 12, 1), PackedInt32Array(3, 11, 10, 2), PackedInt32Array(4, 5, 11, 3), PackedInt32Array(12, 15, 0, 1), PackedInt32Array(15, 13, 9, 0), PackedInt32Array(13, 10, 12, 15), PackedInt32Array(11, 14, 13, 10), PackedInt32Array(14, 8, 9, 13), PackedInt32Array(6, 14, 8, 7), PackedInt32Array(6, 5, 11, 14)]
+internal_vertex_count = 6
+
+[node name="Head" type="Bone2D" parent="Skeleton2D/Hip/Neck"]
+position = Vector2(0, -31)
+
+[node name="Polygon2D" type="Polygon2D" parent="Skeleton2D/Hip/Neck/Head"]
+position = Vector2(8, -3)
+scale = Vector2(1, 1)
+offset = Vector2(-52, -184)
+texture = ExtResource("2_bwcca")
+skeleton = NodePath("../../../..")
+polygon = PackedVector2Array(28.3264, 148.074, 41.2287, 156.143, 44.7313, 160.045, 46.6822, 154.946, 53.4215, 148.162, 61.5353, 157.739, 70.0467, 161.608, 71.5489, 165.793, 77.5851, 171.569, 82.9499, 171.784, 90.1388, 180.206, 109.251, 192.527, 119.713, 194.834, 119.956, 216.281, 112.173, 220.922, 104.032, 220.994, 91.7504, 221.422, 91.7347, 227.088, 84.766, 231.329, 52.0069, 231.957, 50.2542, 215.014, 32.773, 208.875, 22.062, 200.046, 21.9893, 188.161, 25.359, 175.806, 28.7286, 170.881, 19.8026, 161.96, 111.964, 200.147, 103.955, 200.735, 88.0437, 185.082, 65.7231, 167.016, 73.5064, 173.585, 83.7589, 216.355, 86.6152, 205.839, 53.1906, 201.92, 31.9407, 197.317, 58.2186, 196.173, 91.8732, 200.516, 69.7218, 176.513, 83.5131, 189.031, 59.7998, 194.015, 79.4429, 194.315, 33.0951, 182.792, 36.8505, 175.764, 60.3909, 171.498, 40.9355, 200.052, 41.5403, 186.746, 44.9099, 179.661, 45.6638, 165.963, 54.3097, 162.505)
+uv = PackedVector2Array(28.3264, 148.074, 41.2287, 156.143, 44.7313, 160.045, 46.6822, 154.946, 53.4215, 148.162, 61.5353, 157.739, 70.0467, 161.608, 71.5489, 165.793, 77.5851, 171.569, 82.9499, 171.784, 90.1388, 180.206, 109.251, 192.527, 119.713, 194.834, 119.956, 216.281, 112.173, 220.922, 104.032, 220.994, 91.7504, 221.422, 91.7347, 227.088, 84.766, 231.329, 52.0069, 231.957, 50.2542, 215.014, 32.773, 208.875, 22.062, 200.046, 21.9893, 188.161, 25.359, 175.806, 28.7286, 170.881, 19.8026, 161.96, 111.964, 200.147, 103.955, 200.735, 88.0437, 185.082, 65.7231, 167.016, 73.5064, 173.585, 83.7589, 216.355, 86.6152, 205.839, 53.1906, 201.92, 31.9407, 197.317, 58.2186, 196.173, 91.8732, 200.516, 69.7218, 176.513, 83.5131, 189.031, 59.7998, 194.015, 79.4429, 194.315, 33.0951, 182.792, 36.8505, 175.764, 60.3909, 171.498, 40.9355, 200.052, 41.5403, 186.746, 44.9099, 179.661, 45.6638, 165.963, 54.3097, 162.505)
+polygons = [PackedInt32Array(14, 27, 12, 13), PackedInt32Array(27, 28, 11, 12), PackedInt32Array(28, 15, 14, 27), PackedInt32Array(28, 29, 10, 11), PackedInt32Array(32, 33, 34, 20), PackedInt32Array(18, 32, 20, 19), PackedInt32Array(35, 23, 22, 21), PackedInt32Array(37, 33, 34, 36), PackedInt32Array(31, 8, 7, 30), PackedInt32Array(16, 37, 28, 15), PackedInt32Array(32, 16, 17, 18), PackedInt32Array(32, 33, 37, 16), PackedInt32Array(38, 31, 29, 39), PackedInt32Array(40, 36, 37, 41), PackedInt32Array(42, 24, 23, 35), PackedInt32Array(42, 43, 25, 24), PackedInt32Array(25, 1, 0, 26), PackedInt32Array(2, 5, 4, 3), PackedInt32Array(10, 8, 31, 29), PackedInt32Array(10, 9, 8), PackedInt32Array(41, 39, 38, 40), PackedInt32Array(37, 39, 29, 28), PackedInt32Array(41, 37, 39), PackedInt32Array(44, 38, 31, 30), PackedInt32Array(40, 47, 46, 36), PackedInt32Array(34, 45, 46, 36), PackedInt32Array(45, 35, 42, 46), PackedInt32Array(46, 42, 43, 47), PackedInt32Array(47, 44, 38, 40), PackedInt32Array(45, 20, 21, 35), PackedInt32Array(45, 34, 20), PackedInt32Array(6, 49, 30, 7), PackedInt32Array(49, 48, 44, 30), PackedInt32Array(48, 43, 47, 44), PackedInt32Array(49, 2, 5, 6), PackedInt32Array(48, 1, 25, 43), PackedInt32Array(2, 1, 48, 49)]
+internal_vertex_count = 23
+
+[node name="R_Shoulder" type="Bone2D" parent="Skeleton2D/Hip/Neck"]
+position = Vector2(-30, 3.8147e-06)
+
+[node name="Polygon2D" type="Polygon2D" parent="Skeleton2D/Hip/Neck/R_Shoulder"]
+position = Vector2(7.62939e-06, -3.57628e-06)
+scale = Vector2(1, 1)
+offset = Vector2(-319, -21)
+texture = ExtResource("2_bwcca")
+skeleton = NodePath("../../../..")
+polygon = PackedVector2Array(282.984, 71.9815, 269.055, 50.5524, 283.749, 22.0822, 309.311, 2.18366, 326.823, 0.892437, 341.878, 17.7243, 334.664, 36.0198, 313.75, 56.5219)
+uv = PackedVector2Array(282.984, 71.9815, 269.055, 50.5524, 283.749, 22.0822, 309.311, 2.18366, 326.823, 0.892437, 341.878, 17.7243, 334.664, 36.0198, 313.75, 56.5219)
+polygons = [PackedInt32Array(2, 7, 0, 1), PackedInt32Array(2, 3, 6, 7), PackedInt32Array(3, 4, 5, 6)]
+
+[node name="R_Forearm" type="Bone2D" parent="Skeleton2D/Hip/Neck/R_Shoulder"]
+position = Vector2(-33, 30)
+
+[node name="Polygon2D" type="Polygon2D" parent="Skeleton2D/Hip/Neck/R_Shoulder/R_Forearm"]
+z_index = -1
+position = Vector2(-3.05176e-05, -7.62939e-06)
+scale = Vector2(1, 1)
+offset = Vector2(-318, -77)
+texture = ExtResource("2_bwcca")
+skeleton = NodePath("../../../../..")
+polygon = PackedVector2Array(325.663, 60.4026, 305.044, 63.0591, 289.231, 80.0102, 276.328, 97.7202, 278.605, 115.557, 299.983, 116.695, 314.658, 107.334, 334.012, 82.2872, 300.274, 87.5461, 291.798, 97.0337)
+uv = PackedVector2Array(325.663, 60.4026, 305.044, 63.0591, 289.231, 80.0102, 276.328, 97.7202, 278.605, 115.557, 299.983, 116.695, 314.658, 107.334, 334.012, 82.2872, 300.274, 87.5461, 291.798, 97.0337)
+polygons = [PackedInt32Array(9, 3, 2, 8), PackedInt32Array(8, 0, 1, 2), PackedInt32Array(8, 6, 7, 0), PackedInt32Array(6, 5, 9, 8), PackedInt32Array(5, 4, 3, 9)]
+internal_vertex_count = 2
+
+[node name="R_Hand" type="Bone2D" parent="Skeleton2D/Hip/Neck/R_Shoulder/R_Forearm"]
+position = Vector2(-28, 26)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 138.0
+
+[node name="Polygon2D" type="Polygon2D" parent="Skeleton2D/Hip/Neck/R_Shoulder/R_Forearm/R_Hand"]
+z_index = -2
+offset = Vector2(-307, -138)
+texture = ExtResource("2_bwcca")
+skeleton = NodePath("../../../../../..")
+polygon = PackedVector2Array(279.032, 143.137, 303.446, 117.208, 322.809, 119.397, 330.217, 136.907, 319.609, 149.872, 314.895, 164.352, 303.614, 163.342, 295.532, 167.719, 281.221, 157.28, 308.653, 145.112, 297.853, 135.78, 311.85, 147.185)
+uv = PackedVector2Array(279.032, 143.137, 303.446, 117.208, 322.809, 119.397, 330.217, 136.907, 319.609, 149.872, 314.895, 164.352, 303.614, 163.342, 295.532, 167.719, 281.221, 157.28, 308.653, 145.112, 297.853, 135.78, 311.85, 147.185)
+polygons = [PackedInt32Array(10, 1, 0, 8), PackedInt32Array(10, 9, 7, 8), PackedInt32Array(11, 6, 7, 9), PackedInt32Array(11, 4, 5, 6), PackedInt32Array(10, 1, 2, 9), PackedInt32Array(3, 2, 11, 4), PackedInt32Array(11, 9, 2)]
+internal_vertex_count = 3
+
+[node name="End" type="Marker2D" parent="Skeleton2D/Hip/Neck/R_Shoulder/R_Forearm/R_Hand"]
+position = Vector2(-12, 11)
+
+[node name="R_Leg" type="Bone2D" parent="Skeleton2D/Hip"]
+
+[node name="R_Thigh" type="Bone2D" parent="Skeleton2D/Hip/R_Leg"]
+position = Vector2(-30, -1)
+
+[node name="R_Knee" type="Bone2D" parent="Skeleton2D/Hip/R_Leg/R_Thigh"]
+position = Vector2(1, 35)
+
+[node name="R_Foot" type="Bone2D" parent="Skeleton2D/Hip/R_Leg/R_Thigh/R_Knee"]
+position = Vector2(-11, 34)
+
+[node name="R_Toe" type="Bone2D" parent="Skeleton2D/Hip/R_Leg/R_Thigh/R_Knee/R_Foot"]
+position = Vector2(18, 1)
+
+[node name="Marker2D" type="Marker2D" parent="Skeleton2D/Hip/R_Leg/R_Thigh/R_Knee/R_Foot/R_Toe"]
+position = Vector2(16, 0)
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_mt8jd")
 anim_player = NodePath("../AnimationPlayer")
@@ -93,6 +198,7 @@ libraries = {
 position = Vector2(0, 32)
 
 [node name="WeaponController" parent="Body" node_paths=PackedStringArray("ActiveWeapon") instance=ExtResource("2_snfsn")]
+visible = false
 position = Vector2(0, -32)
 ActiveWeapon = NodePath("weapon_assaultRifle")
 
@@ -114,7 +220,9 @@ position = Vector2(128, 0)
 shootSFX = Array[AudioStream]([ExtResource("8_wx7d3")])
 
 [node name="Sprite2D" type="Sprite2D" parent="Body"]
-texture = ExtResource("6_0kr2v")
+modulate = Color(1, 1, 1, 0.482353)
+z_index = 1
+texture = ExtResource("10_um7uk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 32)

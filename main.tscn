@@ -17,11 +17,10 @@ point_count = 2
 [node name="debug_01" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_kpxq5")]
-position = Vector2(2, -86)
+metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 offset = Vector2(0, -160)
-zoom = Vector2(0.8, 0.8)
 script = ExtResource("1_jqhe3")
 maxOffset = Vector2(50, 10)
 target = NodePath("../Player")
