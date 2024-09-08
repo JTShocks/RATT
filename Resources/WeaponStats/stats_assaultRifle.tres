@@ -9,6 +9,7 @@ _baseRateOfFire = 0.09
 _weaponWeight = 1.0
 _weaponShakeForce = 0.15
 _screenShakeDecay = 0.8
+_staggerPerHit = 1.0
 _maxAmmoReserve = 90
 _baseClipSize = 30
 _baseSpread = 50.0
