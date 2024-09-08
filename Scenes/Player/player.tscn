@@ -679,7 +679,6 @@ internal_vertex_count = 23
 z_index = 2
 position = Vector2(-30, -57)
 rotation = -2.19728
-scale = Vector2(0.999926, 0.999926)
 rest = Transform2D(1, 0, 0, 1, -30, -57)
 
 [node name="R_Shoulder" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D"]
@@ -696,7 +695,6 @@ bones = ["TorsoBone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "TorsoBone2D
 [node name="R_ForearmBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D"]
 position = Vector2(-47, -1.90735e-06)
 rotation = -1.18222
-scale = Vector2(0.999952, 0.999952)
 rest = Transform2D(1, 0, 0, 1, -46, 0)
 
 [node name="R_Forearm" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D/R_ForearmBone2D"]
@@ -712,7 +710,6 @@ internal_vertex_count = 2
 [node name="R_HandBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D/R_ForearmBone2D"]
 position = Vector2(-43, -1)
 rotation = 0.920075
-scale = Vector2(0.999891, 0.999891)
 rest = Transform2D(1, 0, 0, 1, -43, -1)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -735,7 +732,6 @@ position = Vector2(0.301223, -0.671455)
 [node name="L_ShoulderBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D"]
 position = Vector2(22, -57)
 rotation = 0.70564
-scale = Vector2(0.999955, 0.999955)
 rest = Transform2D(1, 0, 0, 1, 22, -57)
 
 [node name="L_Shoulder" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D"]
@@ -750,7 +746,6 @@ bones = ["TorsoBone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "TorsoBone2D
 [node name="L_ForearmBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D"]
 position = Vector2(47, 0)
 rotation = -0.919031
-scale = Vector2(0.999927, 0.999927)
 rest = Transform2D(1, 0, 0, 1, 47, 0)
 
 [node name="L_Forearm" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D/L_ForearmBone2D"]
@@ -766,7 +761,7 @@ internal_vertex_count = 2
 [node name="L_HandBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D/L_ForearmBone2D"]
 position = Vector2(43, 0)
 rotation = -0.2656
-scale = Vector2(0.999937, 0.999937)
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(0.999999, 0, 0, 0.999999, 43, 0)
 auto_calculate_length_and_angle = false
 length = 16.0
