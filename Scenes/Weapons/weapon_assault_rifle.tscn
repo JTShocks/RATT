@@ -27,4 +27,3 @@ position = Vector2(78, 0)
 [node name="LaserSight" parent="." instance=ExtResource("5_vkp4a")]
 position = Vector2(75, 9)
 points = PackedVector2Array(0, 0, 1000, 0)
-maxLineLength = 1000.0

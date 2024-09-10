@@ -89,8 +89,8 @@ public partial class Elevator : PathFollow2D
 			player = p;
 			//Save the current player in the elevator
 
-			//PlayerEnteredElevator.Invoke();
-			Start();
+			PlayerEnteredElevator.Invoke();
+			//Start();
 		}
 	}
 	public void OnPlayerExitElevator(Node2D body)
@@ -98,7 +98,7 @@ public partial class Elevator : PathFollow2D
 		if(body is PlayerController p)
 		{
 			//What happens when the player leaves the elevator range
-			//PlayerExitedElevator.Invoke();
+			PlayerExitedElevator.Invoke();
 		}
 	}
 }
