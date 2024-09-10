@@ -153,6 +153,11 @@ public partial class WeaponController : Node2D
 	{
 		EmitSignal(SignalName.OnWeaponReload, ActiveWeapon);
 	}
+
+	public void OnCancelReload()
+	{
+
+	}
 	public void OnReloadComplete()
 	{
 		UpdateWeaponUI();

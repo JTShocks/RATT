@@ -23,6 +23,8 @@ public partial class InputComponent : Node
 		    
         }
 
+		
+
         base._Input(@event);
     }
 
@@ -34,6 +36,11 @@ public partial class InputComponent : Node
 	public bool GetFireInput()
 	{
 		return Input.IsActionJustPressed("Fire");
+	}
+
+	public bool GetInteractInput()
+	{
+		return Input.IsActionJustPressed("Interact");
 	}
 
 }

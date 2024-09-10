@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://l352npvwiphw"]
+[gd_scene load_steps=12 format=4 uid="uid://l352npvwiphw"]
 
 [ext_resource type="Script" path="res://Scripts/Environment/CameraController.cs" id="1_jqhe3"]
 [ext_resource type="PackedScene" uid="uid://cqqvbfhc1uj6h" path="res://Scenes/Player/player.tscn" id="1_kpxq5"]
@@ -7,12 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://qfl8t565c4e4" path="res://Art/Sprites/test_lightCircle.png" id="5_5c1qy"]
 [ext_resource type="PackedScene" uid="uid://4sq6ir70jhof" path="res://Scenes/ActionObject/elevator.tscn" id="6_pw2s3"]
 [ext_resource type="PackedScene" uid="uid://wwiuw6svaj0d" path="res://Scenes/ActionObject/elevator_controller.tscn" id="6_v5uip"]
+[ext_resource type="PackedScene" uid="uid://5ak863g141hp" path="res://Scenes/Components/interactable.tscn" id="8_le1kh"]
+[ext_resource type="Texture2D" uid="uid://bjocit41ao6px" path="res://icon.svg" id="9_ari8u"]
 
 [sub_resource type="Curve2D" id="Curve2D_gmhro"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 640)
 }
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tyfa"]
+size = Vector2(64, 64)
 
 [node name="debug_01" type="Node2D"]
 
@@ -76,3 +81,34 @@ shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("5_5c1qy")
 texture_scale = 10.0
+
+[node name="ElevatorSwitch" type="Node2D" parent="."]
+position = Vector2(1917, 0)
+
+[node name="Interactable" parent="ElevatorSwitch" node_paths=PackedStringArray("interactPrompt", "sprite") instance=ExtResource("8_le1kh")]
+interactPrompt = NodePath("../Label")
+sprite = NodePath("../Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorSwitch/Interactable"]
+shape = SubResource("RectangleShape2D_7tyfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="ElevatorSwitch"]
+texture = ExtResource("9_ari8u")
+
+[node name="Label" type="Label" parent="ElevatorSwitch"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -97.0
+offset_right = 63.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 16)
+theme_override_font_sizes/font_size = 24
+text = "Test Test Test Test"
+horizontal_alignment = 1
+autowrap_mode = 2

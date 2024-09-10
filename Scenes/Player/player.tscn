@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cqqvbfhc1uj6h"]
+[gd_scene load_steps=48 format=3 uid="uid://cqqvbfhc1uj6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.cs" id="1_26cdu"]
 [ext_resource type="Texture2D" uid="uid://kcvtdhwg48h" path="res://Art/Sprites/Player/ratt_textureSheet.png" id="2_bwcca"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://btalw3r61hsvd" path="res://Scenes/Components/health_component.tscn" id="13_4q2jj"]
 [ext_resource type="PackedScene" uid="uid://g0peo8icmqdn" path="res://Scenes/Components/movement_component.tscn" id="14_g1t3g"]
 [ext_resource type="Script" path="res://Scripts/UI Elements/StateDisplayGUI.cs" id="15_2jkrs"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerUI/PlayerHud.cs" id="16_8vd6h"]
 [ext_resource type="PackedScene" uid="uid://b7qtfsfucwqsy" path="res://Scenes/Components/gravity_component.tscn" id="17_ouhfd"]
 [ext_resource type="PackedScene" uid="uid://df6e0kul18444" path="res://Scenes/Components/jump_component.tscn" id="19_6h1pk"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="19_l8h88"]
@@ -30,6 +31,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Crawling.cs" id="25_7koa4"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Diving.cs" id="26_xm25v"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/PlayerStates/Sliding.cs" id="27_fijv4"]
+[ext_resource type="Script" path="res://Scripts/Systems/InteractionSystem/Interactor.cs" id="31_gqca5"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4b3ex"]
 animation = &"2Handed_Rifle_Stand"
@@ -40,18 +42,12 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6pxja"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yffeb"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ax44"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mt8jd"]
 states/2Handed_Rifle_Stand/node = SubResource("AnimationNodeAnimation_4b3ex")
 states/2Handed_Rifle_Stand/position = Vector2(382, 41)
 states/Idle/node = SubResource("AnimationNodeAnimation_c3e2y")
 states/Idle/position = Vector2(386, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_6pxja"), "Start", "2Handed_Rifle_Stand", SubResource("AnimationNodeStateMachineTransition_yffeb"), "Idle", "2Handed_Rifle_Stand", SubResource("AnimationNodeStateMachineTransition_3ax44")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_6pxja")]
 
 [sub_resource type="Animation" id="Animation_gqirm"]
 resource_name = "2Handed_Rifle_Stand"
@@ -573,6 +569,9 @@ modification_count = 2
 modifications/0 = SubResource("SkeletonModification2DFABRIK_64i0y")
 modifications/1 = SubResource("SkeletonModification2DFABRIK_7p5xs")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a703i"]
+radius = 128.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_liw4j"]
 font = ExtResource("9_ltyq7")
 font_size = 20
@@ -615,6 +614,7 @@ shape = SubResource("CapsuleShape2D_14w2p")
 position = Vector2(0, 32)
 
 [node name="WeaponController" parent="Body" node_paths=PackedStringArray("ActiveWeapon") instance=ExtResource("2_snfsn")]
+visible = false
 position = Vector2(0, -32)
 ActiveWeapon = NodePath("weapon_assaultRifle")
 
@@ -679,12 +679,12 @@ internal_vertex_count = 23
 z_index = 2
 position = Vector2(-30, -57)
 rotation = -2.19728
+scale = Vector2(0.999988, 0.999988)
 rest = Transform2D(1, 0, 0, 1, -30, -57)
 
 [node name="R_Shoulder" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D"]
 z_index = 2
 rotation = 0.785397
-scale = Vector2(1, 1)
 offset = Vector2(-319, -21)
 texture = ExtResource("2_bwcca")
 polygon = PackedVector2Array(282.984, 71.9815, 269.055, 50.5524, 283.749, 22.0822, 309.311, 2.18366, 326.823, 0.892437, 341.878, 17.7243, 334.664, 36.0198, 313.75, 56.5219)
@@ -695,6 +695,7 @@ bones = ["TorsoBone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "TorsoBone2D
 [node name="R_ForearmBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D"]
 position = Vector2(-47, -1.90735e-06)
 rotation = -1.18222
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -46, 0)
 
 [node name="R_Forearm" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D/R_ForearmBone2D"]
@@ -710,6 +711,7 @@ internal_vertex_count = 2
 [node name="R_HandBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D/R_ForearmBone2D"]
 position = Vector2(-43, -1)
 rotation = 0.920075
+scale = Vector2(0.999936, 0.999936)
 rest = Transform2D(1, 0, 0, 1, -43, -1)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -732,6 +734,7 @@ position = Vector2(0.301223, -0.671455)
 [node name="L_ShoulderBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D"]
 position = Vector2(22, -57)
 rotation = 0.70564
+scale = Vector2(0.999989, 0.999989)
 rest = Transform2D(1, 0, 0, 1, 22, -57)
 
 [node name="L_Shoulder" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D"]
@@ -746,6 +749,7 @@ bones = ["TorsoBone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "TorsoBone2D
 [node name="L_ForearmBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D"]
 position = Vector2(47, 0)
 rotation = -0.919031
+scale = Vector2(0.999972, 0.999972)
 rest = Transform2D(1, 0, 0, 1, 47, 0)
 
 [node name="L_Forearm" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D/L_ForearmBone2D"]
@@ -761,7 +765,7 @@ internal_vertex_count = 2
 [node name="L_HandBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/L_ShoulderBone2D/L_ForearmBone2D"]
 position = Vector2(43, 0)
 rotation = -0.2656
-scale = Vector2(0.999999, 0.999999)
+scale = Vector2(0.999946, 0.999946)
 rest = Transform2D(0.999999, 0, 0, 0.999999, 43, 0)
 auto_calculate_length_and_angle = false
 length = 16.0
@@ -879,6 +883,18 @@ editor_settings/show_bone_gizmo = false
 
 [node name="End" type="Marker2D" parent="Body/Skeleton2D/TorsoBone2D/L_LegBone2D/L_FootBone2D/AnkleBone2D/EndBone2D"]
 
+[node name="Interactor" type="Area2D" parent="Body" node_paths=PackedStringArray("playerInput")]
+position = Vector2(0, -32)
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+script = ExtResource("31_gqca5")
+playerInput = NodePath("../../InputComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Interactor"]
+position = Vector2(64, 0)
+shape = SubResource("CircleShape2D_a703i")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
@@ -966,7 +982,7 @@ theme = ExtResource("10_1ejha")
 text = "Current Map"
 label_settings = SubResource("LabelSettings_mktd5")
 
-[node name="PlayerUi" type="Control" parent="."]
+[node name="PlayerUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -980,8 +996,9 @@ offset_bottom = -137.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
+script = ExtResource("16_8vd6h")
 
-[node name="ProgressBar" type="ProgressBar" parent="PlayerUi"]
+[node name="ProgressBar" type="ProgressBar" parent="PlayerUI"]
 layout_direction = 2
 layout_mode = 1
 anchors_preset = 8
@@ -999,7 +1016,7 @@ pivot_offset = Vector2(100, 16)
 show_percentage = false
 script = ExtResource("12_7bet3")
 
-[node name="CurrentState" type="Label" parent="PlayerUi" node_paths=PackedStringArray("stateMachine")]
+[node name="CurrentState" type="Label" parent="PlayerUI" node_paths=PackedStringArray("stateMachine")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -1063,5 +1080,5 @@ script = ExtResource("27_fijv4")
 slideFriction = 0.05
 
 [connection signal="OnUpdateWeaponUI" from="Body/WeaponController" to="CanvasLayer/WeaponAmmo" method="OnUpdateWeaponUI"]
-[connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Deactivate"]
-[connection signal="OnWeaponReload" from="Body/WeaponController" to="PlayerUi/ProgressBar" method="Activate"]
+[connection signal="OnWeaponFinishReload" from="Body/WeaponController" to="PlayerUI/ProgressBar" method="Deactivate"]
+[connection signal="OnWeaponReload" from="Body/WeaponController" to="PlayerUI/ProgressBar" method="Activate"]
