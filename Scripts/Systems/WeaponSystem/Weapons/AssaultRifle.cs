@@ -10,7 +10,12 @@ public partial class AssaultRifle : Weapon
         if(CurrentAmmo > 0)
         {
             //Shoot the bullet out & play the sound
+            //Play out a tween of the gun recoiling back
+
+
             base.Fire();//Keep as it will always send the signal for the function
+            
+            //Add a tween to move the body sprite back and forward when it fires.
         }
         else if(CurrentAmmo == 0)
         {
