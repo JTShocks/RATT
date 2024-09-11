@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4il6rke3conk"]
+[gd_scene load_steps=5 format=3 uid="uid://d4il6rke3conk"]
 
 [ext_resource type="Script" path="res://Scripts/Systems/WeaponSystem/Weapons/AssaultRifle.cs" id="1_yqv8m"]
 [ext_resource type="Resource" uid="uid://dux6upkjbnhvb" path="res://Resources/WeaponStats/stats_assaultRifle.tres" id="2_s8evi"]
-[ext_resource type="AudioStream" uid="uid://mv23qxbvb4bb" path="res://Art/Audio/Weapons/test_clap.mp3" id="3_pdtxh"]
 [ext_resource type="Texture2D" uid="uid://bljk6vwmkjj48" path="res://Art/Sprites/Weapons/Rifles/AssaultRifle/test_AR.png" id="4_lfh8x"]
 [ext_resource type="PackedScene" uid="uid://chnofr6vj6xoi" path="res://Scenes/VFX/laser_sight.tscn" id="5_vkp4a"]
 
@@ -12,7 +11,6 @@ stats = ExtResource("2_s8evi")
 weaponType = 2
 firePoint = NodePath("FirePoint")
 audioSource = NodePath("AudioStreamPlayer2D")
-shootSFX = ExtResource("3_pdtxh")
 
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("4_lfh8x")

@@ -611,6 +611,7 @@ position = Vector2(0, 32)
 shape = SubResource("CapsuleShape2D_14w2p")
 
 [node name="Body" type="Node2D" parent="."]
+z_index = 3
 position = Vector2(0, 32)
 
 [node name="WeaponController" parent="Body" node_paths=PackedStringArray("ActiveWeapon") instance=ExtResource("2_snfsn")]
@@ -695,7 +696,6 @@ bones = ["TorsoBone2D", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0), "TorsoBone2D
 [node name="R_ForearmBone2D" type="Bone2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D"]
 position = Vector2(-47, -1.90735e-06)
 rotation = -1.18222
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -46, 0)
 
 [node name="R_Forearm" type="Polygon2D" parent="Body/Skeleton2D/TorsoBone2D/R_ShoulderBone2D/R_ForearmBone2D"]
